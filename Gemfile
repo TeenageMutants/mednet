@@ -12,7 +12,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -34,6 +33,22 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  
+  gem "factory_girl_rails"
+  gem 'capybara'
+  # gem 'capybara-webkit'
+  gem 'rspec-rails'
+  gem 'dragonfly'
+  gem 'headless'
+  gem 'test-unit'
+  gem 'guard-rspec'
+  gem 'launchy'
+  gem 'rspec-mocks'
+  gem 'quiet_assets'
+  gem 'turn', :require => false
+  gem 'asset-image-opt'
+  gem 'meta_request'
+  # gem 'strong_parameters'
   gem 'byebug'
 end
 
@@ -44,4 +59,58 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+gem 'haml-rails'
+gem 'kaminari'
+gem 'therubyracer'
+gem 'jquery-rails'
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'twitter-typeahead-rails'
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
+gem 'haml' #for forum
+gem 'simple_form'#for forum
+gem 'ancestry' #for forum
+gem "binding_of_caller" #for forum
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'less-rails'
+gem 'less-rails-bootstrap'
+gem 'spreadsheet'
+gem 'qtip2-jquery-rails', '~> 2.2.100'
+# gem 'jbuilder'
+gem 'pg_search' #for BankDocument
+# gem 'rails3-jquery-autocomplete' #for BankDocuments
+gem 'jquery-ui-rails' #for BankDocuments
+gem 'nifty-generators' #for BankDocuments
+
+#system
+gem 'devise'
+gem 'unicode'
+gem 'ancestry'
+gem 'roo'
+gem 'russian'
+gem 'carrierwave'
+gem "paperclip", "~> 4.2"
+gem 'resque'
+gem 'resque-scheduler'
+gem 'rails-i18n'
+gem 'ffi'
+gem 'passenger'
+gem 'ar-octopus'
+# gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'mini_magick'
+gem "font-awesome-rails", '~> 4.4.0'
+gem 'cancancan'
+gem 'mail_form'
+gem 'image_optim'
+gem 'image_optim_pack'
+gem 'faker'
+gem 'net-ssh-gateway'
+gem 'net-ssh'
+gem 'database_cleaner'
+gem 'redactor-rails'
+gem "carrierwave"
+gem "mini_magick"
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 
