@@ -1,0 +1,640 @@
+
+= render 'release_info'
+-#  -#            %a{:href => "#", :title => "Options"}
+-#  -#              %i.glyphicon.glyphicon-cog
+-#  -#            %a{"data-widgster" => "expand", :href => "#", :style => "display: none;", :title => "Expand"}
+-#  -#              %i.glyphicon.glyphicon-chevron-up
+-#  -#            %a{"data-widgster" => "collapse", :href => "#", :title => "Collapse"}
+-#  -#              %i.glyphicon.glyphicon-chevron-down
+-#  -#            %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+-#  -#              %i.glyphicon.glyphicon-remove
+-#  -#        .body.no-margin
+-#  -#          #visits-chart.chart.visits-chart
+-#  -#            %svg.nvd3-svg
+-#  -#              %g.nvd3.nv-wrap.nv-lineChart{:transform => "translate(25,28)"}
+-#  -#                %g
+-#  -#                  %rect{:height => "147", :style => "opacity: 0;", :width => "623"}
+-#  -#                  %g.nv-x.nv-axis.nvd3-svg{:transform => "translate(0,147)"}
+-#  -#                    %g.nvd3.nv-wrap.nv-axis
+-#  -#                      %g
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(90.8879382345546,0)"}
+-#  -#                          %line{:x2 => "0", :y2 => "-147"}
+-#  -#                          %text{:dy => ".71em", :style => "text-anchor: middle;", :x => "0", :y => "7"} Sep 11
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(215.20945803021235,0)"}
+-#  -#                          %line{:x2 => "0", :y2 => "-147"}
+-#  -#                          %text{:dy => ".71em", :style => "text-anchor: middle;", :x => "0", :y => "7"} Sep 23
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(339.5309778258701,0)"}
+-#  -#                          %line{:x2 => "0", :y2 => "-147"}
+-#  -#                          %text{:dy => ".71em", :style => "text-anchor: middle;", :x => "0", :y => "7"} Oct 05
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(463.85249762152773,0)"}
+-#  -#                          %line{:x2 => "0", :y2 => "-147"}
+-#  -#                          %text{:dy => ".71em", :style => "text-anchor: middle;", :x => "0", :y => "7"} Oct 16
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(588.1740174171855,0)"}
+-#  -#                          %line{:x2 => "0", :y2 => "-147"}
+-#  -#                          %text{:dy => ".71em", :style => "text-anchor: middle;", :x => "0", :y => "7"} Oct 28
+-#  -#                        %path.domain{:d => "M0,0V0H623V0"}
+-#  -#                        %text.nv-axislabel{"text-anchor" => "middle", :x => "311.5", :y => "36"}
+-#  -#                  %g.nv-y.nv-axis.nvd3-svg
+-#  -#                    %g.nvd3.nv-wrap.nv-axis
+-#  -#                      %g
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(0,116.60826985854189)"}
+-#  -#                          %line{:x2 => "623", :y2 => "0"}
+-#  -#                          %text{:dy => ".32em", :style => "text-anchor: end;", :x => "-3", :y => "0"} 200
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(0,84.61697497279653)"}
+-#  -#                          %line{:x2 => "623", :y2 => "0"}
+-#  -#                          %text{:dy => ".32em", :style => "text-anchor: end;", :x => "-3", :y => "0"} 400
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(0,52.62568008705114)"}
+-#  -#                          %line{:x2 => "623", :y2 => "0"}
+-#  -#                          %text{:dy => ".32em", :style => "text-anchor: end;", :x => "-3", :y => "0"} 600
+-#  -#                        %g.tick{:style => "opacity: 1;", :transform => "translate(0,20.634385201305765)"}
+-#  -#                          %line{:x2 => "623", :y2 => "0"}
+-#  -#                          %text{:dy => ".32em", :style => "text-anchor: end;", :x => "-3", :y => "0"} 800
+-#  -#                        %path.domain{:d => "M0,0H0V147H0"}
+-#  -#                        %text.nv-axislabel{:style => "text-anchor: middle;", :transform => "rotate(-90)", :x => "-73.5", :y => "-50"}
+-#  -#                  %g.nv-linesWrap.nvd3-svg
+-#  -#                    %g.nvd3.nv-wrap.nv-line{:transform => "translate(0,0)"}
+-#  -#                      %defs
+-#  -#                        %clippath#nv-edge-clip-58858
+-#  -#                          %rect{:height => "147", :width => "623"}
+-#  -#                      %g{"clip-path" => ""}
+-#  -#                        %g.nv-groups
+-#  -#                          %g.nv-group.nv-series-0{:style => "stroke-opacity: 1; stroke-width: 1.5px; fill-opacity: 0.5; fill: rgb(234, 200, 94); stroke: rgb(234, 200, 94);"}
+-#  -#                            %path.nv-area{:d => "M0,147L21.482758620689655,147L42.96551724137931,147L64.44827586206897,147L85.93103448275862,147L107.41379310344828,147L128.89655172413794,147L150.3793103448276,147L171.86206896551724,147L193.3448275862069,147L214.82758620689657,147L236.3103448275862,147L257.7931034482759,147L279.2758620689655,147L300.7586206896552,147L322.2413793103448,147L343.7241379310345,147L365.2068965517241,147L386.6896551724138,147L408.17241379310343,147L429.65517241379314,147L451.13793103448273,147L472.6206896551724,147L494.1034482758621,147L515.5862068965517,147L537.0689655172414,147L558.551724137931,147L580.0344827586207,147L601.5172413793103,147L623,147L623,146.3601741022851L601.5172413793103,144.12078346028292L580.0344827586207,138.36235038084874L558.551724137931,130.04461371055496L537.0689655172414,132.60391730141458L515.5862068965517,139.96191512513602L494.1034482758621,145.56039173014145L472.6206896551724,145.40043525571272L451.13793103448273,146.68008705114255L429.65517241379314,146.04026115342765L408.17241379310343,145.40043525571272L386.6896551724138,144.44069640914037L365.2068965517241,141.40152339499457L343.7241379310345,129.7247007616975L322.2413793103448,106.05114254624591L300.7586206896552,70.38084874863983L279.2758620689655,29.112078346028287L257.7931034482759,0L236.3103448275862,0.47986942328618587L214.82758620689657,29.91186071817192L193.3448275862069,71.66050054406963L171.86206896551724,107.17083786724702L150.3793103448276,129.40478781284006L128.89655172413794,135.96300326441784L107.41379310344828,67.82154515778019L85.93103448275862,84.61697497279653L64.44827586206897,143.48095756256802L42.96551724137931,147L21.482758620689655,146.04026115342765L0,145.56039173014145Z"}
+-#  -#                            %path.nv-line{:d => "M0,145.56039173014145L21.482758620689655,146.04026115342765L42.96551724137931,147L64.44827586206897,143.48095756256802L85.93103448275862,84.61697497279653L107.41379310344828,67.82154515778019L128.89655172413794,135.96300326441784L150.3793103448276,129.40478781284006L171.86206896551724,107.17083786724702L193.3448275862069,71.66050054406963L214.82758620689657,29.91186071817192L236.3103448275862,0.47986942328618587L257.7931034482759,0L279.2758620689655,29.112078346028287L300.7586206896552,70.38084874863983L322.2413793103448,106.05114254624591L343.7241379310345,129.7247007616975L365.2068965517241,141.40152339499457L386.6896551724138,144.44069640914037L408.17241379310343,145.40043525571272L429.65517241379314,146.04026115342765L451.13793103448273,146.68008705114255L472.6206896551724,145.40043525571272L494.1034482758621,145.56039173014145L515.5862068965517,139.96191512513602L537.0689655172414,132.60391730141458L558.551724137931,130.04461371055496L580.0344827586207,138.36235038084874L601.5172413793103,144.12078346028292L623,146.3601741022851"}
+-#  -#                          %g.nv-group.nv-series-1{:style => "stroke-opacity: 1; stroke-width: 1.5px; fill-opacity: 0.5; fill: rgb(207, 109, 81); stroke: rgb(207, 109, 81);"}
+-#  -#                            %path.nv-line{:d => "M0,145.56039173014145L21.482758620689655,146.20021762785638L42.96551724137931,146.84004352557128L64.44827586206897,146.68008705114255L85.93103448275862,146.52013057671383L107.41379310344828,147L128.89655172413794,146.20021762785638L150.3793103448276,146.04026115342765L171.86206896551724,146.84004352557128L193.3448275862069,146.3601741022851L214.82758620689657,146.20021762785638L236.3103448275862,146.20021762785638L257.7931034482759,144.76060935799782L279.2758620689655,141.88139281828074L300.7586206896552,135.48313384113166L322.2413793103448,123.1664853101197L343.7241379310345,109.4102285092492L365.2068965517241,100.6126224156692L386.6896551724138,103.81175190424375L408.17241379310343,114.68879216539716L429.65517241379314,128.92491838955385L451.13793103448273,137.88248095756256L472.6206896551724,143.00108813928182L494.1034482758621,145.40043525571272L515.5862068965517,146.04026115342765L537.0689655172414,146.3601741022851L558.551724137931,145.72034820457017L580.0344827586207,146.68008705114255L601.5172413793103,146.68008705114255L623,145.72034820457017"}
+-#  -#                        %g.nv-scatterWrap.nvd3-svg{"clip-path" => ""}
+-#  -#                          %g.nvd3.nv-wrap.nv-scatter.nv-chart-58858{:transform => "translate(0,0)"}
+-#  -#                            %defs
+-#  -#                              %clippath#nv-edge-clip-58858
+-#  -#                                %rect{:height => "147", :width => "623"}
+-#  -#                            %g{"clip-path" => ""}
+-#  -#                              %g.nv-groups
+-#  -#                                %g.nv-group.nv-series-0{:style => "stroke-opacity: 1; fill-opacity: 0.5; stroke: rgb(234, 200, 94); fill: rgb(234, 200, 94);"}
+-#  -#                                  %path.nv-point.nv-point-0.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(0,145.56039173014145)"}
+-#  -#                                  %path.nv-point.nv-point-1.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(21.482758620689655,146.04026115342765)"}
+-#  -#                                  %path.nv-point.nv-point-2.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(42.96551724137931,147)"}
+-#  -#                                  %path.nv-point.nv-point-3.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(64.44827586206897,143.48095756256802)"}
+-#  -#                                  %path.nv-point.nv-point-4.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(85.93103448275862,84.61697497279653)"}
+-#  -#                                  %path.nv-point.nv-point-5.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(107.41379310344828,67.82154515778019)"}
+-#  -#                                  %path.nv-point.nv-point-6.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(128.89655172413794,135.96300326441784)"}
+-#  -#                                  %path.nv-point.nv-point-7.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(150.3793103448276,129.40478781284006)"}
+-#  -#                                  %path.nv-point.nv-point-8.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(171.86206896551724,107.17083786724702)"}
+-#  -#                                  %path.nv-point.nv-point-9.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(193.3448275862069,71.66050054406963)"}
+-#  -#                                  %path.nv-point.nv-point-10.nv-noninteractive.hover{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(214.82758620689657,29.91186071817192)"}
+-#  -#                                  %path.nv-point.nv-point-11.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(236.3103448275862,0.47986942328618587)"}
+-#  -#                                  %path.nv-point.nv-point-12.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(257.7931034482759,0)"}
+-#  -#                                  %path.nv-point.nv-point-13.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(279.2758620689655,29.112078346028287)"}
+-#  -#                                  %path.nv-point.nv-point-14.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(300.7586206896552,70.38084874863983)"}
+-#  -#                                  %path.nv-point.nv-point-15.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(322.2413793103448,106.05114254624591)"}
+-#  -#                                  %path.nv-point.nv-point-16.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(343.7241379310345,129.7247007616975)"}
+-#  -#                                  %path.nv-point.nv-point-17.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(365.2068965517241,141.40152339499457)"}
+-#  -#                                  %path.nv-point.nv-point-18.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(386.6896551724138,144.44069640914037)"}
+-#  -#                                  %path.nv-point.nv-point-19.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(408.17241379310343,145.40043525571272)"}
+-#  -#                                  %path.nv-point.nv-point-20.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(429.65517241379314,146.04026115342765)"}
+-#  -#                                  %path.nv-point.nv-point-21.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(451.13793103448273,146.68008705114255)"}
+-#  -#                                  %path.nv-point.nv-point-22.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(472.6206896551724,145.40043525571272)"}
+-#  -#                                  %path.nv-point.nv-point-23.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(494.1034482758621,145.56039173014145)"}
+-#  -#                                  %path.nv-point.nv-point-24.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(515.5862068965517,139.96191512513602)"}
+-#  -#                                  %path.nv-point.nv-point-25.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(537.0689655172414,132.60391730141458)"}
+-#  -#                                  %path.nv-point.nv-point-26.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(558.551724137931,130.04461371055496)"}
+-#  -#                                  %path.nv-point.nv-point-27.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(580.0344827586207,138.36235038084874)"}
+-#  -#                                  %path.nv-point.nv-point-28.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(601.5172413793103,144.12078346028292)"}
+-#  -#                                  %path.nv-point.nv-point-29.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(623,146.3601741022851)"}
+-#  -#                                %g.nv-group.nv-series-1{:style => "stroke-opacity: 1; fill-opacity: 0.5; stroke: rgb(207, 109, 81); fill: rgb(207, 109, 81);"}
+-#  -#                                  %path.nv-point.nv-point-0.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(0,145.56039173014145)"}
+-#  -#                                  %path.nv-point.nv-point-1.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(21.482758620689655,146.20021762785638)"}
+-#  -#                                  %path.nv-point.nv-point-2.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(42.96551724137931,146.84004352557128)"}
+-#  -#                                  %path.nv-point.nv-point-3.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(64.44827586206897,146.68008705114255)"}
+-#  -#                                  %path.nv-point.nv-point-4.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(85.93103448275862,146.52013057671383)"}
+-#  -#                                  %path.nv-point.nv-point-5.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(107.41379310344828,147)"}
+-#  -#                                  %path.nv-point.nv-point-6.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(128.89655172413794,146.20021762785638)"}
+-#  -#                                  %path.nv-point.nv-point-7.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(150.3793103448276,146.04026115342765)"}
+-#  -#                                  %path.nv-point.nv-point-8.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(171.86206896551724,146.84004352557128)"}
+-#  -#                                  %path.nv-point.nv-point-9.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(193.3448275862069,146.3601741022851)"}
+-#  -#                                  %path.nv-point.nv-point-10.nv-noninteractive.hover{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(214.82758620689657,146.20021762785638)"}
+-#  -#                                  %path.nv-point.nv-point-11.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(236.3103448275862,146.20021762785638)"}
+-#  -#                                  %path.nv-point.nv-point-12.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(257.7931034482759,144.76060935799782)"}
+-#  -#                                  %path.nv-point.nv-point-13.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(279.2758620689655,141.88139281828074)"}
+-#  -#                                  %path.nv-point.nv-point-14.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(300.7586206896552,135.48313384113166)"}
+-#  -#                                  %path.nv-point.nv-point-15.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(322.2413793103448,123.1664853101197)"}
+-#  -#                                  %path.nv-point.nv-point-16.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(343.7241379310345,109.4102285092492)"}
+-#  -#                                  %path.nv-point.nv-point-17.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(365.2068965517241,100.6126224156692)"}
+-#  -#                                  %path.nv-point.nv-point-18.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(386.6896551724138,103.81175190424375)"}
+-#  -#                                  %path.nv-point.nv-point-19.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(408.17241379310343,114.68879216539716)"}
+-#  -#                                  %path.nv-point.nv-point-20.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(429.65517241379314,128.92491838955385)"}
+-#  -#                                  %path.nv-point.nv-point-21.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(451.13793103448273,137.88248095756256)"}
+-#  -#                                  %path.nv-point.nv-point-22.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(472.6206896551724,143.00108813928182)"}
+-#  -#                                  %path.nv-point.nv-point-23.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(494.1034482758621,145.40043525571272)"}
+-#  -#                                  %path.nv-point.nv-point-24.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(515.5862068965517,146.04026115342765)"}
+-#  -#                                  %path.nv-point.nv-point-25.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(537.0689655172414,146.3601741022851)"}
+-#  -#                                  %path.nv-point.nv-point-26.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(558.551724137931,145.72034820457017)"}
+-#  -#                                  %path.nv-point.nv-point-27.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(580.0344827586207,146.68008705114255)"}
+-#  -#                                  %path.nv-point.nv-point-28.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(601.5172413793103,146.68008705114255)"}
+-#  -#                                  %path.nv-point.nv-point-29.nv-noninteractive{:d => "M0,2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,-2.256758334191025A2.256758334191025,2.256758334191025 0 1,1 0,2.256758334191025Z", :transform => "translate(623,145.72034820457017)"}
+-#  -#                              %g.nv-point-paths
+-#  -#                            %g.nv-point-clips
+-#  -#                  %g.nv-legendWrap.nvd3-svg{:transform => "translate(0,-28)"}
+-#  -#                    %g.nvd3.nv-legend{:transform => "translate(0,3)"}
+-#  -#                      %g{:transform => "translate(489.513671875,3)"}
+-#  -#                        %g.nv-series{:transform => "translate(0,5)"}
+-#  -#                          %circle.nv-legend-symbol{:r => "5", :style => "stroke-width: 2px; fill: rgb(234, 200, 94); fill-opacity: 1; stroke: rgb(234, 200, 94);"}
+-#  -#                          %text.nv-legend-text{:dx => "8", :dy => ".32em", :fill => "#000", "text-anchor" => "start"} Unique
+-#  -#                        %g.nv-series{:transform => "translate(72.587890625,5)"}
+-#  -#                          %circle.nv-legend-symbol{:r => "5", :style => "stroke-width: 2px; fill: rgb(207, 109, 81); fill-opacity: 1; stroke: rgb(207, 109, 81);"}
+-#  -#                          %text.nv-legend-text{:dx => "8", :dy => ".32em", :fill => "#000", "text-anchor" => "start"} Visits
+-#  -#                  %g.nv-interactive
+-#  -#                    %g.nv-wrap.nv-interactiveLineLayer
+-#  -#                      %g.nv-interactiveGuideLine
+-#  -#                        %line.nv-guideline{:x1 => "214.82758620689657", :x2 => "214.82758620689657", :y1 => "147", :y2 => "0"}
+-#  -#            #nvtooltip-20691.nvtooltip.xy-tooltip.nv-pointer-events-none{:style => "top: 0px; left: 0px; opacity: 1; transform: translate(281.938px, 67px) !important;"}
+-#  -#              %table
+-#  -#                %thead
+-#  -#                  %tr
+-#  -#                    %td{:colspan => "3"}
+-#  -#                      %strong.x-value Sep 23
+-#  -#                %tbody
+-#  -#                  %tr
+-#  -#                    %td.legend-color-guide
+-#  -#                      %div{:style => "background-color: rgb(234, 200, 94);"}
+-#  -#                    %td.key Unique
+-#  -#                    %td.value 742
+-#  -#                  %tr
+-#  -#                    %td.legend-color-guide
+-#  -#                      %div{:style => "background-color: rgb(207, 109, 81);"}
+-#  -#                    %td.key Visits
+-#  -#                    %td.value 15
+-#  -#          .visits-info.well.well-sm
+-#  -#            .row
+-#  -#              .col-sm-3.col-xs-6
+-#  -#                .key
+-#  -#                  %i.fa.fa-users
+-#  -#                  Total Traffic
+-#  -#                .value
+-#  -#                  24 541
+-#  -#                  %i.fa.fa-caret-up.color-green
+-#  -#              .col-sm-3.col-xs-6
+-#  -#                .key
+-#  -#                  %i.fa.fa-bolt
+-#  -#                  Unique Visits
+-#  -#                .value
+-#  -#                  14 778
+-#  -#                  %i.fa.fa-caret-down.color-red
+-#  -#              .col-sm-3.col-xs-6
+-#  -#                .key
+-#  -#                  %i.fa.fa-plus-square
+-#  -#                  Revenue
+-#  -#                .value
+-#  -#                  $3 583.18
+-#  -#                  %i.fa.fa-caret-up.color-green
+-#  -#              .col-sm-3.col-xs-6
+-#  -#                .key
+-#  -#                  %i.fa.fa-user
+-#  -#                  Total Sales
+-#  -#                .value
+-#  -#                  $59 871.12
+-#  -#                  %i.fa.fa-caret-down.color-red
+-#  -#      %section.widget
+-#  -#        %header
+-#  -#          %h4
+-#  -#            Traffic Sources
+-#  -#            %small
+-#  -#              One month tracking
+-#  -#          .widget-controls
+-#  -#            %a{"data-widgster" => "expand", :href => "#", :style => "display: none;", :title => "Expand"}
+-#  -#              %i.glyphicon.glyphicon-plus
+-#  -#            %a{"data-widgster" => "collapse", :href => "#", :title => "Collapse"}
+-#  -#              %i.glyphicon.glyphicon-minus
+-#  -#            %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+-#  -#              %i.glyphicon.glyphicon-remove
+-#  -#        .body
+-#  -#          %table.table.table-striped.no-margin.sources-table
+-#  -#            %thead
+-#  -#              %tr
+-#  -#                %th.source-col-header Source
+-#  -#                %th Amount
+-#  -#                %th Change
+-#  -#                %th.hidden-xs Percent.,%
+-#  -#                %th Target
+-#  -#                %th.chart-col-header.hidden-xs Trend
+-#  -#            %tbody
+-#  -#              %tr
+-#  -#                %td
+-#  -#                  %span.label.label-important Direct
+-#  -#                %td 713
+-#  -#                %td
+-#  -#                  %strong.color-green +53
+-#  -#                %td.hidden-xs +12
+-#  -#                %td 900
+-#  -#                %td.chart-cell.hidden-xs
+-#  -#                  #direct-trend
+-#  -#                    %canvas{:height => "30", :style => "display: inline-block; width: 150px; height: 30px; vertical-align: top;", :width => "150"}
+-#  -#              %tr
+-#  -#                %td
+-#  -#                  %span.label.label-warning Refer
+-#  -#                %td 562
+-#  -#                %td
+-#  -#                  %strong +84
+-#  -#                %td.hidden-xs +64
+-#  -#                %td 500
+-#  -#                %td.chart-cell.hidden-xs
+-#  -#                  #refer-trend
+-#  -#                    %canvas{:height => "30", :style => "display: inline-block; width: 150px; height: 30px; vertical-align: top;", :width => "150"}
+-#  -#              %tr
+-#  -#                %td
+-#  -#                  %span.label.label-success Social
+-#  -#                %td 148
+-#  -#                %td
+-#  -#                  %strong.color-red -12
+-#  -#                %td.hidden-xs +3
+-#  -#                %td 180
+-#  -#                %td.chart-cell.hidden-xs
+-#  -#                  #social-trend
+-#  -#                    %canvas{:height => "30", :style => "display: inline-block; width: 150px; height: 30px; vertical-align: top;", :width => "150"}
+-#  -#              %tr
+-#  -#                %td
+-#  -#                  %span.label.label-info Search
+-#  -#                %td 653
+-#  -#                %td
+-#  -#                  %strong.color-green +23
+-#  -#                %td.hidden-xs +43
+-#  -#                %td 876
+-#  -#                %td.chart-cell.hidden-xs
+-#  -#                  #search-trend
+-#  -#                    %canvas{:height => "30", :style => "display: inline-block; width: 150px; height: 30px; vertical-align: top;", :width => "150"}
+-#  -#              %tr
+-#  -#                %td
+-#  -#                  %span.label.label-inverse Internal
+-#  -#                %td 976
+-#  -#                %td
+-#  -#                  %strong +101
+-#  -#                %td.hidden-xs -7
+-#  -#                %td 844
+-#  -#                %td.chart-cell.hidden-xs
+-#  -#                  #internal-trend
+-#  -#                    %canvas{:height => "30", :style => "display: inline-block; width: 150px; height: 30px; vertical-align: top;", :width => "150"}
+-#  -#      %section.widget.large
+-#  -#        %header
+-#  -#          %h4
+-#  -#            Chat
+-#  -#          .widget-controls
+-#  -#            %a{:href => "#", :title => "Options"}
+-#  -#              %i.glyphicon.glyphicon-cog
+-#  -#            %a{"data-widgster" => "close", :href => "#", :title => "Close"}
+-#  -#              %i.glyphicon.glyphicon-remove
+-#  -#        .body
+-#  -#          #chat.chat
+-#  -#            .slimScrollDiv{:style => "position: relative; overflow: hidden; width: auto; height: 240px;"}
+-#  -#              #chat-messages.chat-messages{:style => "overflow: hidden; width: auto; height: 240px;"}
+-#  -#                .chat-message
+-#  -#                  .sender.pull-left
+-#  -#                    .icon
+-#  -#                      %img.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+-#  -#                    .time
+-#  -#                      4 min
+-#  -#                  .chat-message-body
+-#  -#                    %span.arrow
+-#  -#                    .sender
+-#  -#                      %a{:href => "#"} Tikhon Laninga
+-#  -#                    .text
+-#  -#                      Hey Sam, how is it going? But I must explain to you how all this mistaken
+-#  -#                      idea of denouncing of a pleasure and praising pain was born
+-#  -#                .chat-message
+-#  -#                  .sender.pull-right
+-#  -#                    .icon
+-#  -#                      %img.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/1.jpg"}/
+-#  -#                    .time
+-#  -#                      3 min
+-#  -#                  .chat-message-body.on-left
+-#  -#                    %span.arrow
+-#  -#                    .sender
+-#  -#                      %a{:href => "#"} Cenhelm Houston
+-#  -#                    .text
+-#  -#                      Pretty good. Doing my homework..  No one rejects, dislikes, or avoids
+-#  -#                      pleasure itself, because it is pleasure, but because
+-#  -#                .chat-message
+-#  -#                  .sender.pull-left
+-#  -#                    .icon
+-#  -#                      %img.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+-#  -#                    .time
+-#  -#                      2 min
+-#  -#                  .chat-message-body
+-#  -#                    %span.arrow
+-#  -#                    .sender
+-#  -#                      %a{:href => "#"} Tikhon Laninga
+-#  -#                    .text
+-#  -#                      Any chance to go out? To take a trivial example, which of us ever undertakes
+-#  -#                      laborious physical exercise, except to obtain some advantage
+-#  -#                .chat-message
+-#  -#                  .sender.pull-right
+-#  -#                    .icon
+-#  -#                      %img.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/1.jpg"}/
+-#  -#                    .time
+-#  -#                      2 min
+-#  -#                  .chat-message-body.on-left
+-#  -#                    %span.arrow
+-#  -#                    .sender
+-#  -#                      %a{:href => "#"} Cenhelm Houston
+-#  -#                    .text
+-#  -#                      \.. Maybe 40-50 mins. I don't know exactly. On the other hand, we denounce
+-#  -#                      with righteous indignation and dislike men who are so beguiled
+-#  -#                .chat-message
+-#  -#                  .sender.pull-left
+-#  -#                    .icon
+-#  -#                      %img.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+-#  -#                    .time
+-#  -#                      1 min
+-#  -#                  .chat-message-body
+-#  -#                    %span.arrow
+-#  -#                    .sender
+-#  -#                      %a{:href => "#"} Tikhon Laninga
+-#  -#                    .text
+-#  -#                      Anyway sounds great! These cases are perfectly simple and easy to
+-#  -#                      distinguish.
+-#  -#              .slimScrollBar{:style => "width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 145.823px; background: rgb(0, 0, 0);"}
+-#  -#              .slimScrollRail{:style => "width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"}
+-#  -#            %footer.chat-footer.row
+-#  -#              .col-xs-9
+-#  -#                %input#new-message.form-control.input-transparent{:placeholder => "Enter your message..", :type => "text"}/
+-#  -#              .col-xs-3
+-#  -#                %button#new-message-btn.btn.btn-transparent.btn-block{:type => "button"} Send
+-#  -#    .col-lg-4
+-#  -#      %section.widget.large
+-#  -#        %header
+-#  -#          %h4
+-#  -#            Feed
+-#  -#            %span.label.label-success 412
+-#  -#          .actions
+-#  -#            %button.btn.btn-transparent.btn-xs
+-#  -#              Show All
+-#  -#              %i.fa.fa-arrow-down
+-#  -#        .body
+-#  -#          .slimScrollDiv{:style => "position: relative; overflow: hidden; width: auto; height: 280px;"}
+-#  -#            #feed.feed{:style => "overflow: hidden; width: auto; height: 280px;"}
+-#  -#              .wrapper
+-#  -#                .vertical-line
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %i.fa.fa-comment
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      %a{:href => "#"} John Doe
+-#  -#                      commented on
+-#  -#                      = succeed "." do
+-#  -#                        %a{:href => "#"} What Makes Good Code Good
+-#  -#                    .time.pull-left
+-#  -#                      3 h
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %i.fa.fa-check.color-green
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      %a{:href => "#"} Merge request #42
+-#  -#                      has been approved by
+-#  -#                      = succeed "." do
+-#  -#                        %a{:href => "#"} Jessica Lori
+-#  -#                    .time.pull-left
+-#  -#                      10 h
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %img.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/14.jpg"}/
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      New user
+-#  -#                      %a{:href => "#"} Greg Wilson
+-#  -#                      registered.
+-#  -#                    .time.pull-left
+-#  -#                      Today
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %i.fa.fa-bolt.color-orange
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      Server fail level raises above normal.
+-#  -#                      %a{:href => "#"} See logs
+-#  -#                      for details.
+-#  -#                    .time.pull-left
+-#  -#                      Yesterday
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %i.fa.fa-database
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      %a{:href => "#"} Database usage report
+-#  -#                      is ready.
+-#  -#                    .time.pull-left
+-#  -#                      Yesterday
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %i.fa.fa-shopping-cart
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      %a{:href => "#"} Order #233985
+-#  -#                      needs additional processing.
+-#  -#                    .time.pull-left
+-#  -#                      Wednesday
+-#  -#                %section.feed-item
+-#  -#                  .icon.pull-left
+-#  -#                    %i.fa.fa-arrow-down
+-#  -#                  .feed-item-body
+-#  -#                    .text
+-#  -#                      %a{:href => "#"} Load more...
+-#  -#            .slimScrollBar{:style => "width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 198.985px; background: rgb(0, 0, 0);"}
+-#  -#            .slimScrollRail{:style => "width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"}
+-#  -#      %section.widget.widget-tabs
+-#  -#        %header
+-#  -#          %ul.nav.nav-tabs
+-#  -#            %li.active
+-#  -#              %a{"data-toggle" => "tab", :href => "#stats"} Users
+-#  -#            %li
+-#  -#              %a{"data-toggle" => "tab", :href => "#report"} Favorites
+-#  -#            %li
+-#  -#              %a{"data-toggle" => "tab", :href => "#dropdown1"} Commenters
+-#  -#        .body.tab-content
+-#  -#          #stats.tab-pane.active.clearfix
+-#  -#            %h5.tab-header
+-#  -#              %span.label.label-primary
+-#  -#                %i.fa.fa-facebook
+-#  -#              Last logged-in users
+-#  -#            %ul.news-list
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/1.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Finees Lund
+-#  -#                  .position Product Designer
+-#  -#                  .time Last logged-in: Mar 20, 18:46
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/3.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Erebus Novak
+-#  -#                  .position Software Engineer
+-#  -#                  .time Last logged-in: Mar 23, 9:02
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Leopoldo Reier
+-#  -#                  .position Chief Officer
+-#  -#                  .time Last logged-in: Jun 6, 15:34
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/13.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Frans Garey
+-#  -#                  .position Financial Assistant
+-#  -#                  .time Last logged-in: Jun 8, 17:20
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/14.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Jessica Johnsson
+-#  -#                  .position Sales Manager
+-#  -#                  .time Last logged-in: Jun 8, 9:13
+-#  -#          #report.tab-pane
+-#  -#            %h5.tab-header
+-#  -#              %i.fa.fa-star
+-#  -#              Popular contacts
+-#  -#            %ul.news-list.news-list-no-hover
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/14.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Jessica Johnsson
+-#  -#                  .options
+-#  -#                    %button.btn.btn-xs.btn-success
+-#  -#                      %i.fa.fa-phone
+-#  -#                      Call
+-#  -#                    %button.btn.btn-xs.btn-warning
+-#  -#                      %i.fa.fa-envelope-o
+-#  -#                      Message
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/13.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Frans Garey
+-#  -#                  .options
+-#  -#                    %button.btn.btn-xs.btn-success
+-#  -#                      %i.fa.fa-phone
+-#  -#                      Call
+-#  -#                    %button.btn.btn-xs.btn-warning
+-#  -#                      %i.fa.fa-envelope-o
+-#  -#                      Message
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/3.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Erebus Novak
+-#  -#                  .options
+-#  -#                    %button.btn.btn-xs.btn-success
+-#  -#                      %i.fa.fa-phone
+-#  -#                      Call
+-#  -#                    %button.btn.btn-xs.btn-warning
+-#  -#                      %i.fa.fa-envelope-o
+-#  -#                      Message
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Leopoldo Reier
+-#  -#                  .options
+-#  -#                    %button.btn.btn-xs.btn-success
+-#  -#                      %i.fa.fa-phone
+-#  -#                      Call
+-#  -#                    %button.btn.btn-xs.btn-warning
+-#  -#                      %i.fa.fa-envelope-o
+-#  -#                      Message
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/1.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Finees Lund
+-#  -#                  .options
+-#  -#                    %button.btn.btn-xs.btn-success
+-#  -#                      %i.fa.fa-phone
+-#  -#                      Call
+-#  -#                    %button.btn.btn-xs.btn-warning
+-#  -#                      %i.fa.fa-envelope-o
+-#  -#                      Message
+-#  -#          #dropdown1.tab-pane
+-#  -#            %h5.tab-header
+-#  -#              %i.fa.fa-comments
+-#  -#              Top Commenters
+-#  -#            %ul.news-list
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/13.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Frans Garey
+-#  -#                  .comment
+-#  -#                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+-#  -#                    sed quia
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/1.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Finees Lund
+-#  -#                  .comment
+-#  -#                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+-#  -#                    eu fugiat.
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/14.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Jessica Johnsson
+-#  -#                  .comment
+-#  -#                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+-#  -#                    deserunt.
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/3.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Erebus Novak
+-#  -#                  .comment
+-#  -#                    Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium
+-#  -#                    doloremque.
+-#  -#              %li
+-#  -#                %img.pull-left.img-circle{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+-#  -#                .news-item-info
+-#  -#                  .name
+-#  -#                    %a{:href => "#"} Leopoldo Reier
+-#  -#                  .comment
+-#  -#                    Laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis
+-#  -#                    et quasi.
+-#  -#      %section.widget
+-#  -#        %header
+-#  -#          %h4
+-#  -#            Server Overview
+-#  -#          .actions
+-#  -#            %small.text-muted.pull-right 2 days ago
+-#  -#        .body
+-#  -#          %ul.server-stats
+-#  -#            %li
+-#  -#              .key.pull-right CPU
+-#  -#              .stat
+-#  -#                .info 60% / 37°C / 3.3 Ghz
+-#  -#                .progress.progress-small
+-#  -#                  .progress-bar.progress-bar-danger{:style => "width: 70%;"}
+-#  -#            %li
+-#  -#              .key.pull-right Mem
+-#  -#              .stat
+-#  -#                .info 29% / 4GB (16 GB)
+-#  -#                .progress.progress-small
+-#  -#                  .progress-bar{:style => "width: 29%;"}
+-#  -#            %li
+-#  -#              .key.pull-right LAN
+-#  -#              .stat
+-#  -#                .info
+-#  -#                  6 Mb/s
+-#  -#                  %i.fa.fa-caret-down
+-#  -#                    3 Mb/s
+-#  -#                  %i.fa.fa-caret-up
+-#  -#                .progress.progress-small
+-#  -#                  .progress-bar.progress-bar-inverse{:style => "width: 48%;"}
+-#  -#.loader-wrap.hiding.hide
+-#  -#  %i.fa.fa-circle-o-notch.fa-spin
+-#  -#
+-#  -#
+-#  -#
+-#

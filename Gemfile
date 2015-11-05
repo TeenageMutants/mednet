@@ -85,6 +85,9 @@ gem 'nifty-generators' #for BankDocuments
 
 #system
 gem 'devise'
+gem 'devise'
+gem 'cancancan'
+gem 'rolify'
 gem 'unicode'
 gem 'ancestry'
 gem 'roo'
@@ -100,7 +103,6 @@ gem 'ar-octopus'
 # gem 'jquery-datatables-rails', '~> 3.1.1'
 gem 'mini_magick'
 gem "font-awesome-rails", '~> 4.4.0'
-gem 'cancancan'
 gem 'mail_form'
 gem 'image_optim'
 gem 'image_optim_pack'
