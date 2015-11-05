@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20151105122614) do
     t.integer "type_organization_id"
     t.string  "phone_city_code"
     t.string  "reception_phone"
+    t.string  "ext_number"
     t.string  "fax"
     t.string  "address"
     t.string  "lsd_id"
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20151105122614) do
   create_table "userinfos", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "contact_phone"
+    t.string   "ext_number"
     t.integer  "organization_id"
     t.integer  "branch_id"
     t.integer  "position_id"

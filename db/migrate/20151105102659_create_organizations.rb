@@ -6,6 +6,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.belongs_to :type_organization, nil: false
       t.string :phone_city_code
       t.string :reception_phone
+      t.string :ext_number
       t.string :fax
       t.string :address
       t.string :lsd_id

@@ -3,6 +3,7 @@ class CreateUserinfos < ActiveRecord::Migration
     create_table :userinfos do |t|
       t.belongs_to :user, nil: false
       t.string :contact_phone
+      t.string :ext_number
       t.belongs_to :organization, nil: false
       t.integer :branch_id
       t.belongs_to :position, nil: false
