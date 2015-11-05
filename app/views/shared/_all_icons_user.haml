@@ -1,0 +1,79 @@
+%li.visible-phone-landscape
+  %a#search-toggle{:href => "#"}
+    %i.fa.fa-search
+  %li.dropdown
+    %a#messages.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Messages"}
+      %i.fa.fa-comments
+    %ul#messages-menu.dropdown-menu.messages{:role => "menu"}
+      %li{:role => "presentation"}
+        %a.message{:href => "#"}
+          %img{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/1.jpg"}/
+          .details
+            .sender Jane Hew
+            .text
+              Hey, John! How is it going? ...
+      %li{:role => "presentation"}
+        %a.message{:href => "#"}
+          %img{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/2.jpg"}/
+          .details
+            .sender Alies Rumiancaŭ
+            .text
+              I'll definitely buy this template
+      %li{:role => "presentation"}
+        %a.message{:href => "#"}
+          %img{:alt => "", :src => "http://demo.flatlogic.com/3.2/white/img/3.jpg"}/
+          .details
+            .sender Michał Rumiancaŭ
+            .text
+              Is it really Lore ipsum? Lore ...
+      %li{:role => "presentation"}
+        %a.text-align-center.see-all{:href => "#"}
+          See all messages
+          %i.fa.fa-arrow-right
+
+
+
+  %li.dropdown
+    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "8 support tickets"}
+      %i.fa.fa-group
+      %span.count 8
+    %ul#support-menu.dropdown-menu.support{:role => "menu"}
+      %li{:role => "presentation"}
+        %a.support-ticket{:href => "#"}
+          .picture
+            %span.label.label-important
+              %i.fa.fa-bell-o
+          .details
+            Check out this awesome ticket
+      %li{:role => "presentation"}
+        %a.support-ticket{:href => "#"}
+          .picture
+            %span.label.label-warning
+              %i.fa.fa-question-circle
+          .details
+            "What is the best way to get ...
+      %li{:role => "presentation"}
+        %a.support-ticket{:href => "#"}
+          .picture
+            %span.label.label-success
+              %i.fa.fa-tag
+          .details
+            This is just a simple notification
+      %li{:role => "presentation"}
+        %a.support-ticket{:href => "#"}
+          .picture
+            %span.label.label-info
+              %i.fa.fa-info-circle
+          .details
+            12 new orders has arrived today
+      %li{:role => "presentation"}
+        %a.support-ticket{:href => "#"}
+          .picture
+            %span.label.label-important
+              %i.fa.fa-plus
+          .details
+            One more thing that just happened
+      %li{:role => "presentation"}
+        %a.text-align-center.see-all{:href => "#"}
+          See all tickets
+          %i.fa.fa-arrow-right
