@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102080138) do
+ActiveRecord::Schema.define(version: 20151105122614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "branches", force: :cascade do |t|
+    t.integer "organization_id"
+    t.string  "short_name"
+    t.string  "full_name"
+    t.string  "senior_phone"
+    t.string  "address"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string  "short_name"
+    t.string  "full_name"
+    t.integer "type_organization_id"
+    t.string  "phone_city_code"
+    t.string  "reception_phone"
+    t.string  "fax"
+    t.string  "address"
+    t.string  "lsd_id"
+    t.string  "web_site"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string  "name"
@@ -24,6 +52,20 @@ ActiveRecord::Schema.define(version: 20151102080138) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "type_organizations", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "userinfos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "contact_phone"
+    t.integer  "organization_id"
+    t.integer  "branch_id"
+    t.integer  "position_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               default: ""
