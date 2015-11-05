@@ -19,3 +19,5 @@
 .ruby-version.rb
 
 config/database.yml
+
+config/shards.yml
