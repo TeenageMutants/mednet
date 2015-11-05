@@ -1,0 +1,35 @@
+#myModalEnter.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{style: "margin-top: 100px; width:350px; z-index: 999999;"}
+    = form_tag new_user_session_path do
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#myModalLabel.modal-title Авторизация
+
+        .modal-body
+          = form_tag new_user_session_path, method: :post, class: "well form-horizontal"  do
+            %fieldset
+              .form-group
+                %label{:for => "login"} Логин
+                .input-group
+                  %span.input-group-addon
+                    %i.fa.fa-user
+                  = text_field_tag 'user[username]', nil,{:class => "email form-control input-lg", placeholder: "Логин", :autofocus => true}
+              .form-group
+                %label{:for => "password"} Пароль
+                .input-group.input-group-lg
+                  %span.input-group-addon
+                    %i.fa.fa-lock
+                  = password_field_tag 'user[password]', nil,{:class => "password input-lg form-control", placeholder: "Пароль"}
+              -#.form-group
+              -#  .checkbox
+              -#    %label
+              -#      = check_box_tag 'user[remember_me]', nil, class: "form-control"
+              -#      Запомнить в системе
+
+            .form-actions
+              %button.btn.btn-block.btn-lg.btn-danger{:type => "submit"}
+                %span.small-circle
+                  %i.fa.fa-caret-right
+                %small Войти

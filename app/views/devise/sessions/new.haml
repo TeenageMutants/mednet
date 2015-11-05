@@ -1,0 +1,33 @@
+.single-widget-container
+  %section.widget.login-widget
+    %header.text-align-center
+      %h4 Войти в свой аккаунт
+    .body
+      = form_tag new_user_session_path, method: :post, class: "well form-horizontal"  do
+        %fieldset
+          .form-group
+            %label{:for => "login"} Логин
+            .input-group
+              %span.input-group-addon
+                %i.fa.fa-user
+              = text_field_tag 'user[username]', nil,{:class => "email form-control input-lg", placeholder: "Логин", :autofocus => true}
+              -#%input#email.form-control.input-lg{:placeholder => "Your Email", :type => "email"}/
+          .form-group
+            %label{:for => "password"} Пароль
+            .input-group.input-group-lg
+              %span.input-group-addon
+                %i.fa.fa-lock
+              = password_field_tag 'user[password]', nil,{:class => "password input-lg form-control", placeholder: "Пароль"}
+              -#%input#password.form-control.input-lg{:placeholder => "Your Password", :type => "password"}/
+        .form-actions
+          %button.btn.btn-block.btn-lg.btn-danger{:type => "submit"}
+            %span.small-circle
+              %i.fa.fa-caret-right
+            %small Войти
+          -#%a.forgot{:href => "#"} Forgot Username or Password?
+    %footer
+      -#.facebook-login
+      -#  %a{:href => "index.html"}
+      -#    %span
+      -#      %i.fa.fa-facebook-square.fa-lg
+      -#      LogIn with Facebook

@@ -1,0 +1,249 @@
+.logo
+  .row
+    .col-md-12
+      = link_to image_tag('mednet_white.png', style: "width: 210px;"), root_path
+%nav#sidebar.sidebar.nav-collapse.collapse
+  %ul#side-nav.side-nav
+    %li.active
+      = link_to root_path do
+        %i.fa.fa-home
+        %span.name Главная
+    %li.panel
+      %ul
+        %li
+          = link_to root_path do
+            %i.fa.fa-comments
+            Форум
+        %li
+          = link_to root_path do
+            %i.fa.fa-calendar
+            Календарь задач
+        %li
+          = link_to root_path do
+            %i.fa.fa-book
+            Банк документов
+    %li.panel
+      %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+        %i.fa.fa-bar-chart
+        %span.name Статистика
+      %ul#stats-collapse.panel-collapse.collapse
+        %li
+          %a{:href => "stat_statistics.html"} Мониторинг
+        %li
+          %a{:href => "stat_charts.html"} Графики
+        %li
+          %a{:href => "stat_realtime.html"} Статистическая информация
+    %li.panel
+      %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#reports-collapse"}
+        %i.fa.fa-briefcase
+        %span.name Отчетность
+      %ul#reports-collapse.panel-collapse.collapse
+        %li
+          %a{:href => "stat_statistics.html"} Отчетность по календарю
+        %li
+          %a{:href => "stat_charts.html"} Дополнительная информация
+    %li.panel
+      %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#vpch-collapse"}
+        %i.fa.fa-medkit
+        %span.name ВПЧ-скрининг
+      %ul#vpch-collapse.panel-collapse.collapse
+        %li
+          = link_to "Поиск пациента", root_path
+        %li
+          = link_to "Мои пациенты", root_path
+        %li
+          = link_to "Реестры", root_path
+        %li
+          = link_to "Справочники", root_path
+        %li
+          = link_to "Лабароторные исследования", root_path
+        %li
+          = link_to "Отчестность", root_path
+        %li
+          = link_to "Дополнительные функции", root_path
+
+    %li.panel
+      %ul
+        %li
+          = link_to root_path do
+            %i.fa.fa-university
+            Инструкции
+        %li
+          = link_to root_path do
+            %i.fa.fa-envelope
+            Контакты
+
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#forms-collapse"}
+  -#      %i.fa.fa-pencil
+  -#      %span.name Forms
+  -#    %ul#forms-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "form_account.html"} Account
+  -#      %li
+  -#        %a{:href => "form_article.html"} Article
+  -#      %li
+  -#        %a{:href => "form_elements.html"} Elements
+  -#      %li
+  -#        %a{:href => "form_validation.html"} Validation
+  -#      %li
+  -#        %a{:href => "form_wizard.html"} Wizard
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+  -#      %i.fa.fa-area-chart
+  -#      %span.name Statistics
+  -#    %ul#stats-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "stat_statistics.html"} Stats
+  -#      %li
+  -#        %a{:href => "stat_charts.html"} Charts
+  -#      %li
+  -#        %a{:href => "stat_realtime.html"} Realtime
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#ui-collapse"}
+  -#      %i.fa.fa-magic
+  -#      %span.name User Interface
+  -#    %ul#ui-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "ui_buttons.html"} Buttons
+  -#      %li
+  -#        %a{:href => "ui_dialogs.html"} Dialogs
+  -#      %li
+  -#        %a{:href => "ui_notifications.html"} Notifications
+  -#      %li
+  -#        %a{:href => "ui_icons.html"} Icons
+  -#      %li
+  -#        %a{:href => "ui_tabs.html"} Tabs
+  -#      %li
+  -#        %a{:href => "ui_accordion.html"} Accordion
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#components-collapse"}
+  -#      %i.fa.fa-tree
+  -#      %span.name Components
+  -#    %ul#components-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "component_calendar.html"} Calendar
+  -#      %li
+  -#        %a{"data-no-pjax" => "", :href => "component_maps.html"} Maps
+  -#      %li
+  -#        %a{:href => "component_gallery.html"} Gallery
+  -#      %li
+  -#        %a{"data-no-pjax" => "", :href => "component_fileupload.html"} Fileupload
+  -#      %li
+  -#        %a{:href => "component_bootstrap.html"} Bootstrap
+  -#      %li
+  -#        %a{:href => "component_list_groups.html"} List Groups
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#tables-collapse"}
+  -#      %i.fa.fa-cog
+  -#      %span.name Tables
+  -#    %ul#tables-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "tables_static.html"}
+  -#          Static
+  -#          %sup.text-danger.fw-bold upd
+  -#      %li
+  -#        %a{:href => "tables_dynamic.html"} Dynamic
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#grid-collapse"}
+  -#      %i.fa.fa-th
+  -#      %span.name Widgets
+  -#    %ul#grid-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "grid_basic.html"} Basic
+  -#      %li
+  -#        %a{:href => "grid_live.html"} Live
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#special-collapse"}
+  -#      %i.fa.fa-leaf
+  -#      %span.name Special
+  -#    %ul#special-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "special_search.html"}
+  -#          Search
+  -#          %sup.text-warning.fw-bold new
+  -#      %li
+  -#        %a{:href => "special_invoice.html"} Invoice
+  -#      %li
+  -#        %a{:href => "special_inbox.html"}
+  -#          Inbox  
+  -#          %span.label.label-important 3
+  -#      %li
+  -#        %a{:href => "login.html", :target => "_blank"} Login
+  -#      %li
+  -#        %a{:href => "error.html", :target => "_blank"} Error Page
+  -#      %li
+  -#        %a{"data-no-pjax" => "", :href => "../transparent/landing.html"} Landing
+  -#      %li
+  -#        %a{"data-no-pjax" => "", :href => "../transparent/index.html"} Transparent
+  -#  %li.panel
+  -#    %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#menu-levels-collapse"}
+  -#      %i.fa.fa-folder-open
+  -#      %span.name Menu Levels
+  -#    %ul#menu-levels-collapse.panel-collapse.collapse
+  -#      %li
+  -#        %a{:href => "#"} Item 1.1
+  -#      %li
+  -#        %a{:href => "#"} Item 1.2
+  -#      %li.panel
+  -#        %a.accordion-toggle.collapsed{"data-parent" => "#menu-levels-collapse", "data-toggle" => "collapse", :href => "#sub-menu-1-collapse"} Item 1.3
+  -#        %ul#sub-menu-1-collapse.panel-collapse.collapse
+  -#          %li.panel
+  -#            %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-1-collapse", "data-toggle" => "collapse", :href => "#sub-menu-3-collapse"} Item 2.1
+  -#            %ul#sub-menu-3-collapse.panel-collapse.collapse
+  -#              %li
+  -#                %a{:href => "#"} Item 3.1
+  -#              %li
+  -#                %a{:href => "#"} Item 3.2
+  -#              %li
+  -#                %a{:href => "#"} Item 3.3
+  -#          %li
+  -#            %a{:href => "#"} Item 2.2
+  -#          %li.panel
+  -#            %a.accordion-toggle.collapsed{"data-parent" => "#sub-menu-1-collapse", "data-toggle" => "collapse", :href => "#sub-menu-2-collapse"} Item 2.3
+  -#            %ul#sub-menu-2-collapse.panel-collapse.collapse
+  -#              %li
+  -#                %a{:href => "#"} Item 3.4
+  -#              %li
+  -#                %a{:href => "#"} Item 3.5
+  -#              %li
+  -#                %a{:href => "#"} Item 3.6
+  -#  %li.visible-xs
+  -#    %a{:href => "login.html"}
+  -#      %i.fa.fa-sign-out
+  -#      %span.name Sign Out
+  -#%h5.sidebar-nav-title
+  -#  Labels
+  -#  %a.action-link{:href => "#"}
+  -#    %i.glyphicon.glyphicon-plus
+  -#/ some styled links in sidebar. ready to use as links to email folders, projects, groups, etc
+  -#%ul.sidebar-labels
+  -#  %li
+  -#    %a{:href => "#"}
+  -#      / yep, .circle again
+  -#      %i.fa.fa-circle.text-warning
+  -#      %span.label-name My Recent
+  -#  %li
+  -#    %a{:href => "#"}
+  -#      %i.fa.fa-circle.text-gray
+  -#      %span.label-name Starred
+  -#  %li
+  -#    %a{:href => "#"}
+  -#      %i.fa.fa-circle.text-danger
+  -#      %span.label-name Background
+  -#%h5.sidebar-nav-title Projects
+  -#/ A place for sidebar notifications & alerts
+  .sidebar-alerts
+    .alert.fade.in
+      %a.close{"aria-hidden" => "true", "data-dismiss" => "alert", :href => "#"} ×
+      %span.text-white.fw-semi-bold Пациенты не в реестре
+      %br/
+      .progress.progress-xs.mt-xs.mb-0
+        .progress-bar.progress-bar-gray-light{:style => "width: 16%"}
+      %small 65 чел.
+    -#.alert.fade.in
+    -#  %a.close{"aria-hidden" => "true", "data-dismiss" => "alert", :href => "#"} ×
+    -#  %span.text-white.fw-semi-bold Personal Responsibility
+    -#  %br/
+    -#  .progress.progress-xs.mt-xs.mb-0
+    -#    .progress-bar.progress-bar-danger{:style => "width: 23%"}
+    -#  %small Provide required notes

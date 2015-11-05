@@ -2,8 +2,72 @@
 %html
   %head
     %title Mednet
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,300", :rel => "stylesheet", :type => "text/css"}/
+    = javascript_include_tag "http://d3js.org/d3.v3.min.js"
+
+    -#%script{:src => "http://demo.flatlogic.com/3.2/white/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"}
+    -#%script{:src => "http://demo.flatlogic.com/3.2/white/lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"}
+
+
+    / page application js
+    -#%script{:src => "http://demo.flatlogic.com/3.2/white/js/index.js"}
+    -#%script{:src => "http://demo.flatlogic.com/3.2/white/js/chat.js"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    / common libraries. required for every page
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/underscore/underscore.js"}
+    -#/ common application js
+    %script{:src => "http://demo.flatlogic.com/3.2/white/js/app.js"}
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/jquery.sparkline/index.js"}
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/backbone/backbone.js"}
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/backbone.localStorage/backbone.localStorage-min.js"}
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/d3/d3.min.js"}
+    %script{:src => "http://demo.flatlogic.com/3.2/white/lib/nvd3/build/nv.d3.min.js"}
+    / page application js
+    %script{:src => "http://demo.flatlogic.com/3.2/white/js/index.js"}
+
+    / page template
+
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:charset => "utf-8"}/
+    :javascript
+      /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+             chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+                        https://code.google.com/p/chromium/issues/detail?id=332189
+      */
+    :css
+      .jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}
   %body
-    = yield
+    = render 'shared/modal_enter'
+    - if request.path == new_user_session_path
+      = bootstrap_flash
+      =  yield
+    - else
+      = render 'shared/sidebar'
+      .wrap
+        = render 'shared/topbar'
+        %p
+        .row
+          .col-md-8
+          .col-md-4
+            = bootstrap_flash
+        .content.container
+          = yield
+
