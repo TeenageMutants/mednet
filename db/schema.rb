@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105122614) do
+ActiveRecord::Schema.define(version: 20151106061655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20151105122614) do
     t.string  "senior_phone"
     t.string  "address"
   end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body",       null: false
+    t.integer  "post_id",    null: false
+    t.integer  "user_id",    null: false
+    t.string   "ancestry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
@@ -44,6 +56,18 @@ ActiveRecord::Schema.define(version: 20151105122614) do
   create_table "positions", force: :cascade do |t|
     t.string "name"
   end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",      null: false
+    t.text     "body",       null: false
+    t.integer  "user_id",    null: false
+    t.boolean  "closed"
+    t.boolean  "attached"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string  "name"

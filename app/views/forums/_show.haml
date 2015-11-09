@@ -8,10 +8,10 @@
       -else
         Без имени
       ,
-      - if user_organization(post.id).present?
-        = user_organization(post.id)
-      -else
-        учреждение не указано
+      -#- if user_organization(post.id).present?
+      -#  = user_organization(post.id)
+      -#-else
+      -#  учреждение не указано
 
       ,
       %i.fa.fa-clock-o
@@ -45,7 +45,7 @@
       0
     %td{style:"width: 25%;"}
   -if current_user.present?
-    - if User.find(current_user.id).role_id == 1
+    - if User.find(current_user.id).username == 'admin'
       %td
         - unless post.closed == true
           .row

@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
 
-  attr_accessor :body, :title, :user_id, :updated_at, :created_at, :closed, :attached
+  # attr_accessor :body, :title, :user_id, :updated_at, :created_at, :closed, :attached
   # validates :body, :title, presence: true
   has_many :comments, dependent: :destroy
 

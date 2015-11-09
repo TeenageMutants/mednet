@@ -109,7 +109,7 @@ class ForumsController < ApplicationController
   # GET /forums/new
   def new
     # @post = Post.add_post(post_params)
-    @post = Post.new
+    @post = Post.new(post_params)
     if params[:commit].present?
       if @post.errors.empty?
         @post = Post.add_post(post_params)

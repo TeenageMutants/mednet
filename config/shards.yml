@@ -8,7 +8,7 @@ octopus:
       adapter: postgresql
       database: mednet_development
       username: postgres
-      password: '123123'
+      password: 'hlk6'
       pool: 5
   production:
     shard_one:

@@ -22,7 +22,7 @@
       %th Ответов
       %th Последнее обновление
       -if current_user.present?
-        - if User.find(current_user.id).role_id == 1
+        - if User.find(current_user.id).username == 'admin'
           %th Редакция
           %th Статус
     %tbody
