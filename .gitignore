@@ -20,10 +20,6 @@
 
 config/database.yml
 
-config/shards.yml
-
-config/shards.yml
-
 .ruby-version
 
 config/shards.yml
