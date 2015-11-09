@@ -1,0 +1,20 @@
+#modal_forum_post.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{style: "margin-top: 100px; width:500px; z-index: 999999;"}
+    = form_for @post, url: new_forum_path, id: "posts", :method => 'get' do |f|
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"}
+          %h4#modal_forum_post.modal-title Создание темы форума
+        .modal-body
+          .form-group
+            = f.label :title, "Название"
+            %br
+            = f.text_field :title, prompt: "Название темы", class: "form-control"
+          .form-group
+            = f.label :body, "Описание"
+            = f.text_area :body, :value => params[:body], size:"60x12", class: "redactor", :rows => 40, :cols => 120, prompt: "Описание темы"
+
+            = f.hidden_field :user_id, :value => current_user.id
+          = f.submit "Сохранить", class: 'btn btn-sm btn-primary', id: 'save_post'
+          = link_to "Закрыть", forums_path, class: "btn btn-sm btn-default", data: { confirm: "Точно выйти?"}

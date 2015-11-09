@@ -1,0 +1,16 @@
+%h3 Редактирование темы форума
+= form_for @post, url: edit_forum_path, :method => 'post' do |f|
+  .form-group
+    = f.label :title, "Название"
+    %br
+    = f.text_field :title, value: @post.title,  class: "form-control"
+    %br
+  .form-group
+    = f.label :body, "Описание"
+    = f.text_area :body, value: params[:body], size:"60x12", class: "redactor"
+    = f.hidden_field :user_id, :value => current_user.id
+  %br
+
+  = f.submit "Изменить", class: "btn btn-success", name: 'save_post', id: 'save_post'
+
+  = link_to "Отмена", forums_path, class: "btn btn-default", data: { confirm: "Точно выйти?"}

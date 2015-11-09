@@ -1,0 +1,10 @@
+%h4 Редактирование комментария:
+= form_for @comment, url: edit_comment_forum_path, :method => 'post' do |f|
+  .form-group
+    = f.text_area :body, value: @comment.body, size:"60x12", class: "redactor", :rows => 40, :cols => 120
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :post_id, value:  @comment.post_id.to_i
+  %br
+
+  = f.submit "Изменить", class: "btn btn-sm btn-primary", id: 'save_comment'
+  = link_to "Отмена", forum_path(@comment.post_id.to_i), class: "btn btn-sm btn-default", data: { confirm: "Выйти без сохранения?"}

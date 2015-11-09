@@ -1,0 +1,6 @@
+Ваш ответ на комментарий
+= render :partial => 'comment', object: @comment.parent if @comment.parent
+
+-#= render :partial => 'form', object: @comment.parent if @comment.parent
+-#= render 'form'
+= render :partial => "form",  object: @comment.parent if @comment.parent

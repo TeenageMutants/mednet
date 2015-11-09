@@ -3,6 +3,21 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :forums, shallow: true do
+    member do
+      post 'edit'
+      get 'add_comment'
+      post "create_comment"
+      get 'new_comment'
+      get 'delete'
+      post 'edit_comment'
+      get 'edit_comment'
+      get 'delete_comment'
+      get 'closed'
+      get 'attached'
+    end
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

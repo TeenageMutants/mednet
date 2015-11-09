@@ -1,0 +1,74 @@
+%h3.page-title
+  = link_to "Форум", forums_path
+  = "/"
+  = link_to "#{@post.title}", forum_path
+  %br
+- if @post.closed == true
+  %p.text-warning
+    Тема закрыта для обсуждения
+
+%i.fa.fa-user
+  -if User.find(@post.user_id).fio.present?
+    = User.find(@post.user_id).fio.html_safe
+  -else
+    Без имени
+  ,
+  - if user_organization(@post.id).present?
+    = user_organization(@post.id)
+  -else
+    учреждение не указано
+
+  ,
+  %i.fa.fa-clock-o
+  %i
+    = I18n.l @post.created_at, format: :short
+
+
+
+
+
+
+- if @post.created_at != @post.updated_at
+  %em
+    (отредактировано:
+    %span.time
+      %i.fa.fa-clock-o
+        %em
+          #{I18n.l @post.updated_at, format: :short}
+          %em
+            )
+%br
+
+= @post.body.html_safe
+
+%br
+
+%strong
+  Комментарии:
+= nested_comments @comments.arrange(:order => :created_at)
+
+
+
+- unless @post.closed == true
+  %br
+  -#-if current_user.present?
+  -#.col-md-20.form-group
+  -#  .block4
+  .well
+    %strong
+      = render 'form'
+  -#Если нужен форум для любого незарегистированного пользователя
+  -#- else
+  -#  = render 'shared/modal'
+  -#  = render 'shared/modal_request_add_user'
+  -#  .col-md-10.form-group
+  -#    Для ответа на форуме
+  -#    = link_to "#", "data-target" => "#myModal", "data-toggle" => "modal" do
+  -#      войдите
+  -#    или
+  -#    = link_to "#", "data-target" => "#mednetModal", "data-toggle" => "modal" do
+  -#      зарегистрируйтесь
+
+
+  -#.col-md-12.form-group
+= will_paginate @comments

@@ -1,0 +1,72 @@
+-#- for comment in @comments
+
+
+
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-md-9
+        %i.fa.fa-user
+          -if User.find(comment.user_id).fio.present?
+            = User.find(comment.user_id).fio.html_safe
+          -else
+            Без имени
+          ,
+          - if comment_user_organization(comment.user_id).html_safe.present?
+            = comment_user_organization(comment.user_id).html_safe
+          -else
+            учреждение не указано
+          ,
+          -#%span.time
+          %i.fa.fa-clock-o
+          #{I18n.l comment.created_at, format: :short}
+        - if comment.created_at != comment.updated_at
+          %em
+            (отредактировано: #{I18n.l comment.updated_at, format: :short})
+
+            -#-#%span.time
+            -#%i.fa.fa-clock-o
+            -#  %em
+            -#    =I18n.l comment.updated_at, format: :short
+            -#    %em
+            -#      )
+
+
+      -#
+      .col-md-3
+        - unless Post.find(comment.post_id.to_i).closed == true
+          .pull-right
+            - if current_user.id == comment.user_id or User.find(current_user.id).role_id == 1
+
+              .col-md-1
+                = link_to edit_comment_forum_path(id: comment.id), class: "btn btn-sm btn-warning" do
+                  %i.fa.fa.fa-pencil-square-o
+              .col-md-1
+              .col-md-1
+                = link_to delete_comment_forum_path(id: comment.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
+                  %i.fa.fa.fa-trash-o
+
+
+
+
+  .panel-body
+    - if comment.parent.present?
+      .alert.alert-info
+        %em
+          Ответ на сообщение
+          %strong
+            #{comment.parent.body.html_safe.truncate(50)}
+          от #{I18n.l comment.parent.created_at, format: :short}
+          , пользователя
+          %strong
+            -if User.find(comment.parent.user_id).fio.present?
+              #{User.find(comment.parent.user_id).fio.html_safe}
+            -else
+              Без имени
+
+    = comment.body.html_safe
+    %br
+      -if current_user.present?
+        - unless @comment.parent.present?
+          - unless Post.find(comment.post_id.to_i).closed == true
+            = link_to "Ответить на комментарий", new_comment_forum_path(:parent_id => comment), class: "btn btn-sm btn-success"

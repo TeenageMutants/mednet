@@ -1,0 +1,71 @@
+%td{style:"width: 50%;"}
+  %strong
+    = link_to post.title, forum_path(id: post.id)
+  %br
+    %i.fa.fa-user
+      -if User.find(Post.find(post.id).user_id).fio.present?
+        = User.find(Post.find(post.id).user_id).fio.html_safe
+      -else
+        Без имени
+      ,
+      - if user_organization(post.id).present?
+        = user_organization(post.id)
+      -else
+        учреждение не указано
+
+      ,
+      %i.fa.fa-clock-o
+      %i
+        = I18n.l Post.find(post.id).created_at, format: :short
+      -#  -#= render :partial => "forums/fio_hosp_user_form", :locals => {:post => post}
+
+
+  - if Comment.where(post_id: post.id).present?
+    %td{style:"width: 15%;"}
+      = Comment.where(post_id: post.id).count
+    %td{style:"width: 25%;"}
+
+      %i.fa.fa-user
+        -if user_fio(post.id).present?
+          = user_fio(post.id)
+        -else
+          Без имени
+        ,
+        - if user_organization(post.id).present?
+          = user_organization(post.id)
+        -else
+          учреждение не указано
+      ,
+      %i.fa.fa-clock-o
+      %i
+        = I18n.l Comment.where(post_id: post.id).last.created_at, format: :short
+
+  - else
+    %td{style:"width: 15%;"}
+      0
+    %td{style:"width: 25%;"}
+  -if current_user.present?
+    - if User.find(current_user.id).role_id == 1
+      %td
+        - unless post.closed == true
+          .row
+            .col-xs-2
+              = link_to edit_forum_path(id: post.id), class: "btn btn-sm btn-warning" do
+                %i.fa.fa.fa-pencil-square-o
+
+            .col-xs-2
+              = link_to closed_forum_path(id: post.id), data: { confirm: "Точно заблокировать?"}, class: "btn btn-success btn-sm" do
+                %i.fa.fa-ban.fa-fw
+
+        -#.col-xs-2
+        = link_to delete_forum_path(id: post.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
+          %i.fa.fa.fa-trash-o
+
+      %td
+        -unless post.attached == true
+          = link_to attached_forum_path(id: post.id, attached: true), data: { confirm: "Изменить статус темы?"}, class: "btn btn-sm btn-success", id: "attached_post" do
+            %i.fa.fa-hand-o-up
+        -else
+          = link_to attached_forum_path(id: post.id, not_attached: true), data: { confirm: "Изменить статус темы?"}, class: "btn btn-sm btn-danger", id: "attached_post" do
+            %i.fa.fa-hand-o-down
+

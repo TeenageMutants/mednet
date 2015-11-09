@@ -1,0 +1,12 @@
+%h2 Новая тема
+
+= form_for @post, url: new_forum_path, :method => 'get' do |f|
+  = f.text_field :title
+  = f.text_area :body, :value => params[:body], size:"60x12", class: "redactor", :rows => 40, :cols => 120
+  = f.hidden_field :user_id, :value => current_user.id
+  %br
+    = f.submit "Создать тему"
+
+= link_to 'На главную', forums_path
+
+

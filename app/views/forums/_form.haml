@@ -1,0 +1,9 @@
+= form_for @comment, url: create_comment_forum_url, :method => 'post' do |f|
+  .form-group
+    = f.text_area :body, :value => params[:body], rows: 10, cols: 125, placeholder: "добавьте комментарий в это поле", class: "redactor"
+
+    = f.hidden_field :post_id, :value => @post.id
+    = f.hidden_field :user_id, :value => current_user.id
+    = f.hidden_field :parent_id, :value => params[:parent_id]
+
+    = f.submit "Отправить", class: 'btn btn-primary btn-sm', id: 'save_comment'
