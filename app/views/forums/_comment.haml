@@ -12,10 +12,10 @@
           -else
             Без имени
           ,
-          - if comment_user_organization(comment.user_id).html_safe.present?
-            = comment_user_organization(comment.user_id).html_safe
-          -else
-            учреждение не указано
+          -#- if comment_user_organization(comment.user_id).html_safe.present?
+          -#  = comment_user_organization(comment.user_id).html_safe
+          -#-else
+          -#  учреждение не указано
           ,
           -#%span.time
           %i.fa.fa-clock-o

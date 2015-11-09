@@ -32,7 +32,7 @@ class ForumsController < ApplicationController
   end
 
   def create_comment
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
 
     if params[:comment][:parent_id].to_i > 0
       parent = Comment.find_by_id(params[:comment].delete(:parent_id))
@@ -40,12 +40,23 @@ class ForumsController < ApplicationController
     else
       @comment = Comment.new(comment_params)
     end
+
     if @comment.save
       flash[:success] = 'Ваш комментарий добавлен'
       redirect_to forum_path(params[:id])
     else
       render :new_comment
     end
+    # if params[:commit].present?
+    #   if @comment.errors.empty?
+    #     @comment = Comment.add_comment(comment_params)
+    #     flash[:success] = 'Ваш комментарий добавлен'
+    #     redirect_to forum_path(params[:id])
+    #   else
+    #     render :new_comment
+    #   end
+    #
+    # end
 
   end
 
@@ -76,19 +87,19 @@ class ForumsController < ApplicationController
 
   end
 
-  def add_comment
-    a = (Comment.find(params[:parent_id]).post_id).truncate
-    @titl = Post.find(a).title
-    @comments = Comment.where(post_id: params[:id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
-    if params[:commit].present?
-      # Comment.add_comment(params)
-      Comment.create(comment_params)
-      redirect_to forum_path(params[:id]), notice: "ок"
-    end
-    if @comment.body.blank?
-      return flash[:danger] = 'Поля не должны быть пустыми'
-    end
-  end
+  # def add_comment
+  #   a = (Comment.find(params[:parent_id]).post_id).truncate
+  #   @titl = Post.find(a).title
+  #   @comments = Comment.where(post_id: params[:id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
+  #   if params[:commit].present?
+  #     # Comment.add_comment(params)
+  #     Comment.create(comment_params)
+  #     redirect_to forum_path(params[:id]), notice: "ок"
+  #   end
+  #   if @comment.body.blank?
+  #     return flash[:danger] = 'Поля не должны быть пустыми'
+  #   end
+  # end
 
   def show
     @comments = Comment.order("comment_id")
