@@ -23,7 +23,3 @@ config/database.yml
 .ruby-version
 
 config/shards.yml
-
-
-
-
