@@ -1,7 +1,5 @@
 -#%td{style:"width: 50%;"}
 %td
-  .sparkline{"data-bar-color" => "#f0b518", "data-type" => "bar"}
-    %canvas{:height => "18", :style => "display: inline-block; width: 34px; height: 18px; vertical-align: top;", :width => "34"}
   %strong
     = link_to post.title, forum_path(id: post.id)
   %br
@@ -56,14 +54,14 @@
             .col-xs-2
               = link_to edit_forum_path(id: post.id), class: "btn btn-sm btn-warning" do
                 %i.fa.fa.fa-pencil-square-o
-
+            .col-xs-1
             .col-xs-2
               = link_to closed_forum_path(id: post.id), data: { confirm: "Точно заблокировать?"}, class: "btn btn-success btn-sm" do
                 %i.fa.fa-ban.fa-fw
-
-        -#.col-xs-2
-        = link_to delete_forum_path(id: post.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
-          %i.fa.fa.fa-trash-o
+            .col-xs-1
+            .col-xs-2
+              = link_to delete_forum_path(id: post.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
+                %i.fa.fa.fa-trash-o
 
       %td
         -unless post.attached == true

@@ -78,7 +78,9 @@ class ForumsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all
-    @posts = Post.order('closed desc, attached ').order('created_at desc').paginate(:page => params[:page], :per_page => 15)
+
+    @posts = Post.order(closed: :desc, attached: :asc).order(created_at: :desc).paginate(:page => params[:page], :per_page => 15)
+
     @comment = Comment.new
   end
 
@@ -98,7 +100,6 @@ class ForumsController < ApplicationController
   # GET /forums/new
   def new
     @post = Post.new
-
   end
 
  # /forums POST
@@ -114,13 +115,7 @@ class ForumsController < ApplicationController
       flash[:notice] = "Заполните пустые поля"
       render 'new'
     end
-
-
-    # end
-
   end
-
-
 
 
   def edit
@@ -134,9 +129,7 @@ class ForumsController < ApplicationController
   end
 
   def delete
-    # if params[:del] == 'delete'
     Post.find(params[:id]).destroy
-    # Comment.find(params[:post_id]).destroy
     redirect_to forums_path, notice: "Пост удален"
   end
 
@@ -145,7 +138,6 @@ class ForumsController < ApplicationController
     post.closed = true
     post.save
     redirect_to forums_path, notice: "Тема закрыта для обсуждения"
-
   end
 
 
