@@ -1,0 +1,2 @@
+class AdminParkEquipmentsController < ApplicationController
+end

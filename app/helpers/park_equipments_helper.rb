@@ -1,0 +1,2 @@
+module ParkEquipmentsHelper
+end
