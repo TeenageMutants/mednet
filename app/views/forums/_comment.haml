@@ -66,6 +66,7 @@
 
     = comment.body.html_safe
     %br
+      %br
       -if current_user.present?
         - unless @comment.parent.present?
           - unless Post.find(comment.post_id.to_i).closed == true

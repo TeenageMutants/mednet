@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
 
   before_filter :check_auth, only: [:edit, :delete]
-  before_filter :check_role_id, only: [:create]
+  # before_filter :check_role_id, only: [:create]
 
   def check_blank
     @comment = Comment.new(:parent_id => params[:parent_id])
@@ -20,11 +20,52 @@ class ForumsController < ApplicationController
 
   def check_auth
     @post = Post.find(params[:id])
-    if current_user.id != @post.user_id or User.find(current_user.id).role_id != 1
+    if current_user.id != @post.user_id
+      # or Users_Roles.find(current_user.id).role_id != 2
       flash[:notice] = "Редактирование чужой записи невозможно"
       redirect_to forums_path
     end
   end
+
+  # def new_comment
+  #   @comment = Comment.new(:parent_id => params[:parent_id])
+  #   @post = Post.find(params[:id])
+  # end
+  #
+  # def create_comment
+  #   @comment = Comment.new(comment_params)
+  #
+  #   if params[:comment][:parent_id].to_i > 0
+  #     parent = Comment.find_by_id(params[:comment].delete(:parent_id))
+  #     @comment = parent.children.build(comment_params)
+  #   else
+  #     @comment = Comment.new(comment_params)
+  #   end
+  #
+  #   if @comment.save
+  #     flash[:success] = 'Ваш комментарий добавлен'
+  #     redirect_to forum_path(params[:id])
+  #   else
+  #     render :new_comment
+  #   end
+  #
+  # end
+  #
+  # def edit_comment
+  #   @comment = Comment.find(params[:id])
+  #   if params[:commit].present?
+  #     @comment.update_attributes!(comment_params)
+  #     id = @comment.post_id.to_i
+  #     redirect_to forum_path(@comment.post_id.to_i), notice: "Комментарий изменен"
+  #   end
+  # end
+  #
+  # def delete_comment
+  #   @comment = Comment.find(params[:id])
+  #   Comment.find(params[:id]).destroy
+  #   redirect_to forum_path(@comment.post_id.to_i), notice: "Комментарий удален"
+  # end
+
 
   def new_comment
     @comment = Comment.new(:parent_id => params[:parent_id])
@@ -40,23 +81,12 @@ class ForumsController < ApplicationController
     else
       @comment = Comment.new(comment_params)
     end
-
     if @comment.save
       flash[:success] = 'Ваш комментарий добавлен'
       redirect_to forum_path(params[:id])
     else
       render :new_comment
     end
-    # if params[:commit].present?
-    #   if @comment.errors.empty?
-    #     @comment = Comment.add_comment(comment_params)
-    #     flash[:success] = 'Ваш комментарий добавлен'
-    #     redirect_to forum_path(params[:id])
-    #   else
-    #     render :new_comment
-    #   end
-    #
-    # end
 
   end
 
@@ -74,6 +104,7 @@ class ForumsController < ApplicationController
     Comment.find(params[:id]).destroy
     redirect_to forum_path(@comment.post_id.to_i), notice: "Комментарий удален"
   end
+
 
 
   def index
@@ -108,58 +139,37 @@ class ForumsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  # def create
-  #   @post = Post.new(post_params)
-  #   if params[:commit].present?
-  #     Post.add_post(params)
-  #
-  #     redirect_to forums_path, notice:"Тема создана"
-  #   end
-  # end
+
+
+
 
   # GET /forums/new
   def new
-    # @post = Post.add_post(post_params)
-    @post = Post.new(post_params)
-    if params[:commit].present?
-      if @post.errors.empty?
-        @post = Post.add_post(post_params)
-        flash[:danger]= post_params
+    @post = Post.new
 
-        redirect_to forums_path, notice: "Тема создана"
-      else
-        render 'new', notice: "NOT"
-      end
-    end
   end
 
-
+ # /forums POST
   def create
+    # @post = Post.new(post_params)
     if params[:commit].present?
-      if @post.errors.empty?
-        @post = Post.create(post_params)
-        redirect_to forums_path, notice: "Тема создана"
-      else
-        render 'new', notice: "NOT"
-      end
+      @post = Post.add_post(post_params)
     end
+
+    if @post.errors.empty?
+      redirect_to forums_path, notice:"Тема создана"
+    else
+      flash[:notice] = "Заполните пустые поля"
+      render 'new'
+    end
+
+
+    # end
+
   end
 
-    # @comment = Comment.new(:parent_id => params[:parent_id])
-    # @post = Post.new
-
-    # if @post.title.blank? || @post.body.blank?
-    #   flash[:danger] = 'Поля не должны быть пустыми'
-    #   render 'shared/modal_forum_post'
-    # else
-    #   Post.add_post(params)
-    #   redirect_to forums_path, notice:"Тема создана"
-    #   end
 
 
-
-    # render text: params.inspect
-  # end
 
   def edit
     @post = Post.find(params[:id])

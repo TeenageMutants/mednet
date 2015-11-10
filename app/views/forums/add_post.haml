@@ -1,6 +1,6 @@
 %h2 Новая тема
 
-= form_for @post, url: {action: "create"} do |f|
+= form_for @post, url:  add_post_new_forum_path, :method => 'post' do |f|
   .form-group
     = f.label :title, "Название"
     %br
@@ -16,4 +16,3 @@
   = link_to "Закрыть", forums_path, class: "btn btn-sm btn-default", data: { confirm: "Точно выйти?"}
 
 
-  -#= form_for @post, action: "/forums", :method => 'post' do |f|

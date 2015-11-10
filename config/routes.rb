@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :forums, shallow: true do
     member do
       post 'edit'
-      get 'add_comment'
+      post 'add_comment'
       post "create_comment"
       get 'new_comment'
       get 'delete'
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
       get 'attached'
     end
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

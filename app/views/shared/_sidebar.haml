@@ -8,12 +8,24 @@
       = link_to root_path do
         %i.fa.fa-home
         %span.name Главная
+
+    %li.panel
+      %a.accordion-toggle.collapsed{"data-parent" => "#side-nav", "data-toggle" => "collapse", :href => "#stats-collapse"}
+        %i.fa.fa-comments
+        %span.name Форум
+      %ul#stats-collapse.panel-collapse.collapse
+        %li
+          = link_to "Просмотр форума", forums_path
+
+        %li
+          = link_to "Новая тема",  new_forum_path
+
     %li.panel
       %ul
-        %li
-          = link_to forums_path do
-            %i.fa.fa-comments
-            Форум
+        -#%li
+        -#  = link_to forums_path do
+        -#    %i.fa.fa-comments
+        -#    Форум
         %li
           = link_to root_path do
             %i.fa.fa-calendar

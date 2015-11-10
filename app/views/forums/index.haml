@@ -6,31 +6,24 @@
 
 %br
 
--#- if User.find(current_user.id).role_id == 1
-= render 'shared/modal_forum_post'
-.pull-left
-  = link_to "Создать тему", "#","data-target" => "#modal_forum_post", "data-toggle" => "modal", class: "btn btn-success btn-sm"
-%br
-
-
 -if @posts.blank?
   %h5 Ни одна тема не создана
 -else
-  %table.table.active
-    %tr.info
-      %th Тема
-      %th Ответов
-      %th Последнее обновление
-      -if current_user.present?
+  %table.table.table-bordered.table-striped.table-lg.mt-lg.mb-0
+    %thead
+      %tr.info
+        %th  Тема
+        %th.text-align-center  Ответов
+        %th  Последнее обновление
+
         - if User.find(current_user.id).username == 'admin'
           %th Редакция
           %th Статус
-    %tbody
+      %tbody
 
-      - @posts.each do |post|
-        %tr{:bgcolor => tr_style(post)}
-          -#= render :partial => "forums/show", :locals => {:post => post}
-          = render "forums/show", post: post
+        - @posts.each do |post|
+          %tr{:bgcolor => tr_style(post)}
+            = render "forums/show", post: post
 
 
 = will_paginate @posts
