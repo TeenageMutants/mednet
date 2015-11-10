@@ -1,4 +1,7 @@
-%td{style:"width: 50%;"}
+-#%td{style:"width: 50%;"}
+%td
+  .sparkline{"data-bar-color" => "#f0b518", "data-type" => "bar"}
+    %canvas{:height => "18", :style => "display: inline-block; width: 34px; height: 18px; vertical-align: top;", :width => "34"}
   %strong
     = link_to post.title, forum_path(id: post.id)
   %br
@@ -8,21 +11,22 @@
       -else
         Без имени
       ,
-      -#- if user_organization(post.id).present?
-      -#  = user_organization(post.id)
-      -#-else
-      -#  учреждение не указано
+      - if user_organization(post.id).present?
+        = user_organization(post.id)
+      -else
+        учреждение не указано
 
       ,
       %i.fa.fa-clock-o
       %i
         = I18n.l Post.find(post.id).created_at, format: :short
-      -#  -#= render :partial => "forums/fio_hosp_user_form", :locals => {:post => post}
+
 
 
   - if Comment.where(post_id: post.id).present?
-    %td{style:"width: 15%;"}
+    %td.text-align-center{style:"width: 15%;"}
       = Comment.where(post_id: post.id).count
+
     %td{style:"width: 25%;"}
 
       %i.fa.fa-user
@@ -31,10 +35,10 @@
         -else
           Без имени
         ,
-        -#- if user_organization(post.id).present?
-        -#  = user_organization(post.id)
-        -#-else
-        -#  учреждение не указано
+        - if user_organization(post.id).present?
+          = user_organization(post.id)
+        -else
+          учреждение не указано
       ,
       %i.fa.fa-clock-o
       %i

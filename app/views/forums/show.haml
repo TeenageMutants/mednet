@@ -6,40 +6,38 @@
 - if @post.closed == true
   %p.text-warning
     Тема закрыта для обсуждения
+%section.widget
+  .body
+    .form-group
+      .strong
+        %i.fa.fa-user
+          -if User.find(@post.user_id).fio.present?
+            = User.find(@post.user_id).fio.html_safe
+          -else
+            Без имени
+          ,
+          - if user_organization(@post.id).present?
+            = user_organization(@post.id)
+          -else
+            учреждение не указано
 
-%i.fa.fa-user
-  -if User.find(@post.user_id).fio.present?
-    = User.find(@post.user_id).fio.html_safe
-  -else
-    Без имени
-  ,
-  -#- if user_organization(@post.id).present?
-  -#  = user_organization(@post.id)
-  -#-else
-  -#  учреждение не указано
+          ,
+          %i.fa.fa-clock-o
+          %i
+            = I18n.l @post.created_at, format: :short
 
-  ,
-  %i.fa.fa-clock-o
-  %i
-    = I18n.l @post.created_at, format: :short
-
-
-
-
-
-
-- if @post.created_at != @post.updated_at
-  %em
-    (отредактировано:
-    %span.time
-      %i.fa.fa-clock-o
-        %em
-          #{I18n.l @post.updated_at, format: :short}
+        - if @post.created_at != @post.updated_at
           %em
-            )
-%br
+            (отредактировано:
+            %span.time
+              %i.fa.fa-clock-o
+                %em
+                  #{I18n.l @post.updated_at, format: :short}
+                  %em
+                    )
+      %br
 
-= @post.body.html_safe
+      = @post.body.html_safe
 
 %br
 

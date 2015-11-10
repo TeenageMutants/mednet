@@ -17,12 +17,12 @@ module ForumsHelper
     tr_attr
   end
 
-  # def user_organization post_id
-  #   userid = Post.find(post_id).user_id
-  #   org_id = InfoDesk.find_by_user_id(userid).organization_id
-  #   org_name = Organization.find(org_id).name
-  #   return org_name
-  # end
+  def user_organization post_id
+    userid = Post.find(post_id).user_id
+    org_id = Userinfo.find_by_user_id(userid).organization_id
+    org_name = Organization.find(org_id).short_name
+    return org_name
+  end
 
   def user_fio post_id
     userid = Comment.find_by_post_id(post_id).user_id
@@ -30,16 +30,16 @@ module ForumsHelper
     return fio
   end
 
-  # def comment_user_organization user_id
-  #   userid = user_id
-  #   if InfoDesk.find_by_user_id(userid).present?
-  #     org_id = InfoDesk.find_by_user_id(userid).organization_id
-  #     org_name = Organization.find(org_id).name
-  #   else
-  #     org_name = 'Организация не указана'
-  #   end
-  #   return org_name
-  # end
+  def comment_user_organization user_id
+    userid = user_id
+    if Userinfo.find_by_user_id(userid).present?
+      org_id = Userinfo.find_by_user_id(userid).organization_id
+      org_name = Organization.find(org_id).short_name
+    else
+      org_name = 'Организация не указана'
+    end
+    return org_name
+  end
 
 
 end

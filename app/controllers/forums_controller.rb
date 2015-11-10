@@ -1,21 +1,28 @@
 class ForumsController < ApplicationController
 
   before_filter :check_auth, only: [:edit, :delete]
-  # before_filter :check_role_id, only: [:create]
 
-  def check_blank
-    @comment = Comment.new(:parent_id => params[:parent_id])
-    if @comment.body.blank?
-      flash[:danger] = 'Поле не должны быть пустыми'
-      # return new_comment
+  before_filter :check_time_created_at, only: [:edit_comment, :delete_comment]
+
+  def check_time_created_at
+    @comment = Comment.find(params[:id])
+    time_create = @comment.created_at
+    time_now = Time.now
+    delay_time = time_now - 15.minutes
+    if time_create < delay_time
+      post_id = @comment.post_id
+      redirect_to forum_path(post_id), notice: "Запись нельзя отредактировать. Прошло больше 15 минут после ее создания."
     end
   end
 
-  def check_role_id
-    unless User.find(current_user.id).role_id == 1
-      redirect_to forums_path, notice: "Вам нельзя создавать темы"
-    end
-  end
+
+  # def check_blank
+  #   @comment = Comment.new(:parent_id => params[:parent_id])
+  #   if @comment.body.blank?
+  #     flash[:danger] = 'Поле не должны быть пустыми'
+  #     # return new_comment
+  #   end
+  # end
 
 
   def check_auth
@@ -26,45 +33,6 @@ class ForumsController < ApplicationController
       redirect_to forums_path
     end
   end
-
-  # def new_comment
-  #   @comment = Comment.new(:parent_id => params[:parent_id])
-  #   @post = Post.find(params[:id])
-  # end
-  #
-  # def create_comment
-  #   @comment = Comment.new(comment_params)
-  #
-  #   if params[:comment][:parent_id].to_i > 0
-  #     parent = Comment.find_by_id(params[:comment].delete(:parent_id))
-  #     @comment = parent.children.build(comment_params)
-  #   else
-  #     @comment = Comment.new(comment_params)
-  #   end
-  #
-  #   if @comment.save
-  #     flash[:success] = 'Ваш комментарий добавлен'
-  #     redirect_to forum_path(params[:id])
-  #   else
-  #     render :new_comment
-  #   end
-  #
-  # end
-  #
-  # def edit_comment
-  #   @comment = Comment.find(params[:id])
-  #   if params[:commit].present?
-  #     @comment.update_attributes!(comment_params)
-  #     id = @comment.post_id.to_i
-  #     redirect_to forum_path(@comment.post_id.to_i), notice: "Комментарий изменен"
-  #   end
-  # end
-  #
-  # def delete_comment
-  #   @comment = Comment.find(params[:id])
-  #   Comment.find(params[:id]).destroy
-  #   redirect_to forum_path(@comment.post_id.to_i), notice: "Комментарий удален"
-  # end
 
 
   def new_comment
@@ -110,27 +78,11 @@ class ForumsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all
-
-    @posts = Post.order('attached DESC').order('closed').order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
-
+    @posts = Post.order('closed desc, attached ').order('created_at desc').paginate(:page => params[:page], :per_page => 15)
     @comment = Comment.new
-
-
   end
 
-  # def add_comment
-  #   a = (Comment.find(params[:parent_id]).post_id).truncate
-  #   @titl = Post.find(a).title
-  #   @comments = Comment.where(post_id: params[:id]).order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
-  #   if params[:commit].present?
-  #     # Comment.add_comment(params)
-  #     Comment.create(comment_params)
-  #     redirect_to forum_path(params[:id]), notice: "ок"
-  #   end
-  #   if @comment.body.blank?
-  #     return flash[:danger] = 'Поля не должны быть пустыми'
-  #   end
-  # end
+
 
   def show
     @comments = Comment.order("comment_id")
