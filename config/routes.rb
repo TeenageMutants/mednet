@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'main#index'
-
+  get 'test' => 'main#test_page'
+  get 'test' => 'main#test_two_page'
   devise_for :users
 
 
