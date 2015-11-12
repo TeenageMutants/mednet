@@ -1,4 +1,4 @@
 class ModelsCharacteristic < ActiveRecord::Base
-  belongs_to :characteristic
   belongs_to :model
+  belongs_to :characteristic
 end

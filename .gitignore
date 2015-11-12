@@ -16,7 +16,7 @@
 
 .ruby-gemset
 
-.ruby-version.rb
+.ruby-version.rbg
 
 config/database.yml
 
