@@ -1,0 +1,47 @@
+= render 'shared/modal_office'
+.well
+  .navbar-collapse.collapse
+    %ul.nav.navbar-nav
+      %li
+        -#= link_to "Создать кабинет", create_office_path, class: "btn btn-primary"
+        -#= link_to "#", "data-target" => "#myModalOffice", "data-toggle" => "modal" do
+        = link_to "#", class: "btn btn-primary", "data-target" => "#modal_office", "data-toggle" => "modal" do
+          Создать кабинет
+        -#%a
+      %li
+        %a{:href => "#"} Создать конфигурацию оборудования
+      %li
+        %a{:href => "#"} Link
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Справочники
+          %b.caret
+        %ul.dropdown-menu
+          %li.divider
+          %li.dropdown-header Организация
+          %li
+            %a{:href => "#"} Отделы
+          %li
+            %a{:href => "#"} Должности
+
+          %li.divider
+          %li.dropdown-header Оборудование
+          %li
+            %a{:href => "#"} Производители
+          %li
+            %a{:href => "#"} Модели
+    %ul.nav.navbar-nav.navbar-right
+      %li.active
+        %a{:href => "./"} Выбрать склад (На склад появится, если склад определен)
+      %li
+        %a{:href => "../navbar-static-top/"} что-то еще
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          = set_organization(current_user.id)
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "#"} Отделы(для данной организации)
+
+          %li
+            %a{:href => "#"} Ответственные лица(для заданной организации)

@@ -115,4 +115,11 @@ gem "carrierwave"
 gem "mini_magick"
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+gem 'activerecord', '~> 4.2', '>= 4.2.4'
+gem 'activesupport', '~> 4.2', '>= 4.2.4'
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl'
+end
 

@@ -48,3 +48,5 @@ Userinfo.create(user_id: admin.id, contact_phone: "725806", ext_number: "46", or
 
 admin.add_role "technics"
 
+
+
