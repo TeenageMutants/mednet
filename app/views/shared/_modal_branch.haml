@@ -1,0 +1,30 @@
+#modal_branch.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
+    = form_for @branch, url: office_park_equipments_path, :method => 'post' do |f|
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#modal_branch.modal-title
+        .modal-body
+          .form-group
+            = f.label "Сокращенное филиала"
+            %br
+            = text_field_tag :short_name
+            %br
+            = f.label "Полное название филиала"
+            %br
+            = text_field_tag :full_name
+            %br
+            = f.label "Контактный телефон"
+            %br
+            = text_field_tag :senior_phone
+            -#, placeholder: "Название филиала", class: "form-control"
+            %br
+            = f.label "Адрес филиала"
+            %br
+            = text_field_tag :address
+            -#,  placeholder: "Адрес", class: "form-control"
+            = hidden_field_tag :organization_id, Userinfo.find_by_user_id(current_user.id).organization_id
+            = hidden_field_tag :act, 'create_branch'
+          = f.submit "Сохранить"

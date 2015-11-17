@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :park_equipments do
+  resources :park_equipments, :only => :index do
+    collection do
+      get 'office'
+      post 'office'
+      # post 'search_departments'
+      post 'search_dep'
+    end
 
   end
 

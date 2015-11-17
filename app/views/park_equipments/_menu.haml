@@ -1,12 +1,11 @@
-= render 'shared/modal_office'
 .well
   .navbar-collapse.collapse
     %ul.nav.navbar-nav
       %li
-        -#= link_to "Создать кабинет", create_office_path, class: "btn btn-primary"
+        = link_to "Кабинет", office_park_equipments_path, class: "btn btn-primary"
         -#= link_to "#", "data-target" => "#myModalOffice", "data-toggle" => "modal" do
-        = link_to "#", class: "btn btn-primary", "data-target" => "#modal_office", "data-toggle" => "modal" do
-          Создать кабинет
+        -#= link_to "#", class: "btn btn-primary", "data-target" => "#modal_office", "data-toggle" => "modal" do
+        -#  Создать кабинет
         -#%a
       %li
         %a{:href => "#"} Создать конфигурацию оборудования

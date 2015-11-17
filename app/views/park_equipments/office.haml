@@ -1,0 +1,96 @@
+= render 'menu'
+= render 'shared/modal_office'
+= render 'shared/modal_branch'
+-#= render 'shared/modal_department'
+Ваша организация:
+= set_organization(current_user.id)
+%br
+-#= @branch_id
+-#= @branchdepartments
+
+
+-if @branches.present?
+  - unless branch_exist(org_id)
+    Выберите филиал:
+    = select_tag :branch, options_from_collection_for_select(@branches, "id", "short_name"),
+    :'data-remote' => 'true',
+    :'data-url' => url_for(controller:'park_equipments', action: 'search_dep'),
+    :'data-type' => 'json', class: 'form-control'
+  -#- else
+  -#  -if @dep_for_org
+    -#  Отделы:
+    -#  - @dep_for_org.each do |dep_org|
+    -#    = dep_org.department_id
+    -#.pull-left
+    -#  = link_to "#", "data-target" => "#modal_department", "data-toggle" => "modal"  do
+    -#    Добавить отдел
+
+
+- else
+  Нет данных об филиалах организации. Для их задания,выберите нужную кнопку:
+  -#%br
+  -#= link_to "#", class: "btn btn-primary", "data-target" => "#modal_branch", "data-toggle" => "modal" do
+  -#  Создать филиал
+  = link_to "В моей организации филиалов нет ", office_park_equipments_path(act: 'create_branch',
+              organization_id: org_id,
+              short_name: Organization.find(org_id).short_name,
+              full_name: Organization.find(org_id).full_name,
+              address: Organization.find(org_id).address),
+              class: "btn btn-primary"
+
+
+
+
+-#%br
+-#  - if @departments.present?
+-#    Выберите отдел:
+-#    = select_tag :department_id, options_from_collection_for_select(@departments, "id", "name"), class: "form-control"
+-#    %br
+
+
+
+
+
+
+
+
+
+  -#= link_to "Найти отделы", select_department("2")
+  -#  - select_department('(this.options[this.selectedIndex].value);')
+  -#
+  -#
+  -#  - if @department.present?
+  -#    - @department.each do |d|
+  -#      =d.name
+%br
+Тут таблица с кабинетами
+- if @branches.present?
+  %br
+  Нет данных о кабинетах в вашей организации.
+  %br
+  = link_to "#", class: "btn btn-primary", "data-target" => "#modal_office", "data-toggle" => "modal" do
+    Создать кабинет
+- else
+  Для создания кабинетов для организации, введите данные о филиалах или их отсутствии
+
+-#- if :branch.present?
+-#  %table.table.table-striped
+-#    %tr.info
+-#      %th Название
+-#      %th Этаж
+-#      %th Корпус
+-#
+-#    %tbody
+-#      - @offices.each do |office|
+-#        %tr
+-#          %td
+-#            = office.number
+-#          %td
+-#            = office.floor.html_safe
+-#
+-#          %td
+-#            = office.block.html_safe
+.pull-left
+  = link_to "#", class: "btn btn-primary", "data-target" => "#modal_branch", "data-toggle" => "modal" do
+    Добавить филиал
+  %br

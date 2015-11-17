@@ -1,6 +1,6 @@
 #modal_office.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
-    = form_tag(park_equipments_path, :method => 'get'  ) do
+    = form_for @office, url: office_park_equipments_path, :method => 'post' do |f|
       .modal-content
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
@@ -9,31 +9,25 @@
         .modal-body
 
           .form-group
-            = label_tag :number, "Номер или название кабинета"
+            = f.label "Номер или название кабинета"
             %br
-            = text_field_tag :number, nil, {:class => "email form-control input-lg", placeholder: "Название кабинета", :autofocus => true}
-            -#, class: "form-control", placeholder: "Название кабинета"
+            = f.text_field :number, class: "form-control", :autofocus => true, placeholder: "Название кабинета"
 
           .form-group
             .row
               .col
-                = label_tag :floor, "Этаж"
-                = select_tag :floor, "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe, class: "form-control"
-              -#options_for_select(set_number_floor(10))
+                = f.label "Этаж"
+                %br
+                = f.text_field :floor, class: "form-control", :autofocus => true, placeholder: "Этаж"
               .col
-                = label_tag :block, "Корпус"
-                = select_tag :block, "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe, class: "form-control"
-          -#options_for_select(set_number_floor(10))
-
-          .form-group
-            = label_tag :branches_department, "Филиал"
-            %br
-            = select_tag :branches_department, "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe, class: "form-control"
-
-
-          -#options_from_collection_for_select(@branch, "id", "name"), prompt_text: "Отдел"
-          = hidden_field_tag :act, 'create'
-          = submit_tag "Сохранить"
+                = f.label "Корпус"
+                %br
+                = f.text_field :block, class: "form-control", :autofocus => true, placeholder: "Корпус"
+              .col
+                -#= f.label "Филиал"
+                = f.text_field :branches_department_id
+          = hidden_field_tag :act, 'create_office'
+          = f.submit "Сохранить"
 
 
 
