@@ -1,29 +1,56 @@
 = render 'menu'
 = render 'shared/modal_office'
 = render 'shared/modal_branch'
+= render 'shared/modal_department'
 -#= render 'shared/modal_department'
 Ваша организация:
 = set_organization(current_user.id)
 %br
--#= @branch_id
--#= @branchdepartments
+
+=select_tag :office, options_from_collection_for_select(find_offices(1, 4), "id", "number"), class: 'form-control'
 
 
--if @branches.present?
-  - unless branch_exist(org_id)
+
+-if find_branches
+  - unless branch_only_one(org_id)
     Выберите филиал:
     = select_tag :branch, options_from_collection_for_select(@branches, "id", "short_name"),
     :'data-remote' => 'true',
     :'data-url' => url_for(controller:'park_equipments', action: 'search_dep'),
     :'data-type' => 'json', class: 'form-control'
-  -#- else
-  -#  -if @dep_for_org
+  - else
+    Вывод отделов
+
+    = select_tag :department, options_from_collection_for_select(find_departments_no_branches, "id", "name"), class: 'form-control'
+
+
+    -#-if @dep_for_org
     -#  Отделы:
     -#  - @dep_for_org.each do |dep_org|
     -#    = dep_org.department_id
-    -#.pull-left
-    -#  = link_to "#", "data-target" => "#modal_department", "data-toggle" => "modal"  do
-    -#    Добавить отдел
+  .pull-right
+    %br
+      = link_to " Добавить отдел", "#", {"data-target" => "#extra_dep_fields", "data-toggle" => "collapse"}
+
+
+
+    #extra_dep_fields.collapsible.collapse
+      %br
+      .row
+        - @departments_all.each do |department|
+          %table.table.table-striped
+            %tr
+              %td
+                = department.name
+                = hidden_field_tag :department_id, department.id
+                = hidden_field_tag :org_id, org_id
+              -#= hidden_field_tag :branch_id, branch_id
+
+              %td
+                = check_box_tag :check, name: "check"
+                =hidden_field_tag :act, "add_departments"
+
+
 
 
 - else
@@ -31,12 +58,18 @@
   -#%br
   -#= link_to "#", class: "btn btn-primary", "data-target" => "#modal_branch", "data-toggle" => "modal" do
   -#  Создать филиал
-  = link_to "В моей организации филиалов нет ", office_park_equipments_path(act: 'create_branch',
-              organization_id: org_id,
-              short_name: Organization.find(org_id).short_name,
-              full_name: Organization.find(org_id).full_name,
-              address: Organization.find(org_id).address),
-              class: "btn btn-primary"
+  -form_tag(office_park_equipments_path, method: 'post')
+  = hidden_field_tag :act, 'create_branch'
+  = hidden_field_tag :organization_id, org_id
+  = hidden_field_tag :short_name, Organization.find(org_id).short_name
+  = hidden_field_tag :full_name, Organization.find(org_id).full_name
+  = hidden_field_tag :address, Organization.find(org_id).address
+  = submit_tag "В моей организации филиалов нет "
+
+
+-#- if @data_from_select1.present?
+-#
+-#  = select_tag :department_id, options_from_collection_for_select(@data_from_select1, "id", "name"), class: "form-control"
 
 
 

@@ -14,18 +14,33 @@ class ParkEquipmentsController < ApplicationController
 
   def office
     @org = Organization.find(Userinfo.find_by_user_id(current_user.id).organization_id)
-    @branches = Branch.where(organization_id: @org.id)
-    # @departments = Department.all
-    # @branch_id = Branch.find_by_organization_id(Userinfo.find_by_user_id(current_user.id).organization_id).id
-    # @branchdepartments = BranchesDepartment.find_by_branch_id(@branch_id)
 
-    # @dep_for_org = @branchdepartments
-        # Department.find(branchdepartments.department_id)
-    # @branches = Branch.where(organization_id: '4')
 
+    # @branches = Branch.where(organization_id: @org.id)
+    @departments_all = Department.all
+
+
+
+    # i = 0
+    # branch_id_arr = []
+    # @branches.each do |br|
+    #   branch_id_arr[i] = br.id
+    #   i += 1
+    # end
+    # departments = BranchesDepartment.where(branch_id:[branch_id_arr])
     #
-    #
-    # @offices = Office.using(:shard_one).all
+    # i = 0
+    # dep_id_arr = []
+    # departments.each do |dep|
+    #   dep_id_arr[i] = dep.department_id
+    #   i += 1
+    # end
+    # @departments = Department.find(dep_id_arr)
+
+
+
+
+
     Octopus.using(:shard_one) do
       # @offices = Office.where(branches_department_id: (BranchesDepartment.where(:branch_id => @branches.id)))
       @office = Office.new
@@ -40,22 +55,33 @@ class ParkEquipmentsController < ApplicationController
     end
 
     @branch = Branch.new
-    if params[:act] == 'create_branch'
 
-      @branch = Branch.create(organization_id: params[:organization_id], short_name: params[:short_name],
-                              full_name: params[:full_name], senior_phone: params[:senior_phone],
-                              address: params[:address])
-      if @branch.errors.present?
-        flash[:danger] = "Ошибки при заполнении формы"
+    if params[:commit].present?
+      if params[:act] == 'create_branch'
+        Branch.add_branch(params)
+
+        # @branch = Branch.create(organization_id: params[:organization_id], short_name: params[:short_name],
+        #                         full_name: params[:full_name], senior_phone: params[:senior_phone],
+        #                         address: params[:address])
+        if @branch.errors.present?
+          flash[:danger] = "Ошибки при заполнении формы"
+          redirect_to office_park_equipments_path
+        end
         redirect_to office_park_equipments_path
       end
-      redirect_to office_park_equipments_path
+
+      if params[:act] == 'create_department'
+        flash[:success] = "Отделы добавлены"
+        redirect_to office_park_equipments_path
+      end
+
+      if params[:act] == 'add_departments'
+        if params[:check].present?
+          render text: params.inspect
+        end
+      end
     end
 
-    if params[:act] == 'create_department'
-      flash[:success] = "Отделы добавлены"
-      redirect_to office_park_equipments_path
-    end
   end
 
 
@@ -63,18 +89,18 @@ class ParkEquipmentsController < ApplicationController
     @data_from_select1 = params[:branch]
     # flash[:danger]= '123'
 
-    dep_id = BranchesDepartment.where(:branch_id => @data_from_select1)
-    i = 0
-    dep_id_arr = []
-    while (i < dep_id.count) do
-      dep_id_arr[i]=dep_id.find(i+1).department_id
-      i += 1
-    end
-
-    @departments = Department.find(dep_id_arr)
-
-    render :json => @departments.map{|c| [c.id, c.short_name]}
-
+    # dep_id = BranchesDepartment.where(:branch_id => @data_from_select1)
+    # i = 0
+    # dep_id_arr = []
+    # while (i < dep_id.count) do
+    #   dep_id_arr[i]=dep_id.find(i+1).department_id
+    #   i += 1
+    # end
+    #
+    # @departments = Department.find(dep_id_arr)
+    #
+    # render :json => @departments.map{|c| [c.id, c.short_name]}
+  redirect_to office_park_equipments_path
   end
 
 

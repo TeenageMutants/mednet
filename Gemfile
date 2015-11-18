@@ -119,6 +119,8 @@ gem 'activerecord', '~> 4.2', '>= 4.2.4'
 gem 'activesupport', '~> 4.2', '>= 4.2.4'
 gem 'simple_form'
 gem 'jquery-rails'
+gem 'carmen-rails'
+
 
 group :test do
   gem 'rspec-rails'
