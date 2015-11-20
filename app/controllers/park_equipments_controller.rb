@@ -1,4 +1,5 @@
 class ParkEquipmentsController < ApplicationController
+
   before_filter :user_present
   def user_present
     unless current_user.present?
@@ -42,7 +43,6 @@ class ParkEquipmentsController < ApplicationController
 
 
     Octopus.using(:shard_one) do
-      # @offices = Office.where(branches_department_id: (BranchesDepartment.where(:branch_id => @branches.id)))
       @office = Office.new
       if params[:act] == 'create_office'
         # render text: params.inspect
@@ -82,6 +82,11 @@ class ParkEquipmentsController < ApplicationController
       end
     end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
 
@@ -116,6 +121,9 @@ class ParkEquipmentsController < ApplicationController
     def branch_params
       params.require(:branch).permit!
     end
+
+
+
 
 
 end

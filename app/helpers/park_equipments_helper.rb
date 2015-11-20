@@ -25,12 +25,14 @@ module ParkEquipmentsHelper
 
   def branch_only_one org_id
     branch = Branch.find_by_organization_id(org_id)
-    if branch.full_name == Organization.find(branch.organization_id).full_name and
-       branch.short_name == Organization.find(branch.organization_id).short_name and
-        branch.address == Organization.find(branch.organization_id).address
-      return true
-    else
-      return false
+    if branch.present?
+      if branch.full_name == Organization.find(branch.organization_id).full_name and
+         branch.short_name == Organization.find(branch.organization_id).short_name and
+          branch.address == Organization.find(branch.organization_id).address
+        return true
+      else
+        return false
+      end
     end
   end
 
