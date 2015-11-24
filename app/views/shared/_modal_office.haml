@@ -1,6 +1,6 @@
 #modal_office.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
-    = form_for @office, url: office_park_equipments_path, :method => 'post' do |f|
+    = form_for @office, url: office_park_equipments_path, :method => 'post', remote: true do |f|
       .modal-content
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}

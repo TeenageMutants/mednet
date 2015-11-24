@@ -57,6 +57,7 @@ module ParkEquipmentsHelper
 
   def find_offices branch_id, department_id
     br_dep_id = BranchesDepartment.where("branch_id=? AND department_id=?", branch_id, department_id)
+
     i = 0
     br_dep_id_ar = []
     br_dep_id.each do |id|

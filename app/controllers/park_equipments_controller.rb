@@ -80,12 +80,27 @@ class ParkEquipmentsController < ApplicationController
           render text: params.inspect
         end
       end
+
+
+
+      # if params[:branch_id].present? and params[:department_id].present?
+      #   br_dep_id = BranchesDepartment.where("branch_id=? AND department_id=?", branch_id, department_id)
+      #
+      #   i = 0
+      #   br_dep_id_ar = []
+      #   br_dep_id.each do |id|
+      #     br_dep_id_ar[i] = id.id
+      #     i += 1
+      #   end
+      #   @offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
+      #   # return @offices
+      # end
     end
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
 
   end
 
