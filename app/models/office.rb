@@ -12,9 +12,6 @@ class Office < ActiveRecord::Base
 
   has_many :work_stations
 
-  FLOOR = {1 => {name: "1 этаж"}, 2 => {name: "2 этаж"}, 3 => {name: "3 этаж"}, 4 => {name: "4 этаж"}, 5 => {name: "5 этаж"}, 6 => {name: "6 этаж"}, 7 => {name: "7 этаж"}, 8 => {name: "8 этаж"}, 9 => {name: "9 этаж"}}
-
-
   def self.add_office params
     Office.create(branches_department_id: params[:branches_department_id], number: params[:number],
                   floor: params[:floor], block: params[:block], is_deleted: params[:is_deleted])
@@ -46,8 +43,6 @@ class Office < ActiveRecord::Base
       offices = offices.where("floor = ?", params[:floor]) if params[:floor].present?
       offices = offices.where("block = ?", params[:block]) if params[:block].present?
 
-
-      # offices = offices.order(:number)
     else
       branch = Branch.find_by_organization_id(params[:org_id]).id
       br_dep = BranchesDepartment.where("branch_id = ?", branch)
@@ -60,7 +55,7 @@ class Office < ActiveRecord::Base
       offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
 
     end
-    # return br_dep
+
     return offices
   end
 end
