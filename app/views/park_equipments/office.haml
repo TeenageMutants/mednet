@@ -17,6 +17,7 @@
         = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name") , prompt: "Выберите отдел", class: "form-control"
       .col-md-2
       = hidden_field_tag :act, 'office_search'
+      = hidden_field_tag :organizat_id, org_id
       .col-md-2
 
         = submit_tag "Поиск", class: "btn btn-primary",data: { disable_with: "Идет поиск, подождите...".html_safe}
@@ -54,36 +55,28 @@
             = link_to "Cбросить поиск", office_park_equipments_path
 
 
-- if @offices.present? and params[:commit].present?
-  %strong
-    %h4
-      -#Результаты поиска:   #{@offices.count} кабинетов
-      -if @branch_name.present?
-        филиал:
-        #{@branch_name.short_name}
-      -if @department.present?
-        отдел: #{@department.name}
-  %p
-  %table.table.table-bordered
-    %th
-      Номер кабинета
+-if params[:commit].present?
+  - unless @offices.present?
+    %center
+      %h3
+        Кабинетов, удовлетворяющих вашему запросу, не нашлось.
+  - else
+    %strong
+      %h4
+        -#Результаты поиска:   #{@offices.count} кабинетов
+        -if @branch_name.present?
+          филиал:
+          #{@branch_name.short_name}
+        -if @department.present?
+          отдел: #{@department.name}
+    %p
+    %table.table.table-bordered
+      %th
+        Номер кабинета
 
 
-    - @offices.each do |office|
+      - @offices.each do |office|
+        %tr
+          %td{style: "width:80%;"}
+            = link_to office.number.html_safe, show_office_park_equipment_path(id: office.id)
 
-      %tr
-        %td{style: "width:80%;"}
-          -#=office.number
-          = link_to office.number.html_safe, show_office_park_equipment_path(id: office.id, branch_id: params[:branch_id], department_id: params[:department_id])
-        -#%td
-        -#  %h6
-        -#    Принят
-        -#    = I18n.l result.taken_at, format: "%d %B %Y"
-        -#    %br
-
-
-
-- elsif @offices.blank? and params[:commit].present?
-  %center
-    %h3
-      Кабинетов, удовлетворяющих вашему запросу, не нашлось.

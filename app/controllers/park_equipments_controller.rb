@@ -81,7 +81,6 @@ class ParkEquipmentsController < ApplicationController
       end
 
       if params[:act] == 'office_search'
-        flash[:notice]='search'
         # render text: params.inspect
         @offices = Office.office_search(params)
         render 'office'
@@ -130,8 +129,10 @@ class ParkEquipmentsController < ApplicationController
 
   def show_office
     @office = Office.using(:shard_one).find(params[:id])
-    @branch = Branch.find(params[:branch_id])
-    @department = Department.find(params[:department_id])
+    br_dep_id = @office.branches_department_id
+    br_dep = BranchesDepartment.find(br_dep_id)
+    @branch = Branch.find(br_dep.branch_id)
+    @department = Department.find(br_dep.department_id)
   end
 
 

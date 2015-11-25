@@ -18,6 +18,7 @@ class Office < ActiveRecord::Base
   end
 
 
+
   def self.office_search params
 
     if params[:branch_id].present? or params[:department_id].present? or  params[:number].present? or params[:floor].present? or params[:block].present?
@@ -43,19 +44,46 @@ class Office < ActiveRecord::Base
       offices = offices.where("floor = ?", params[:floor]) if params[:floor].present?
       offices = offices.where("block = ?", params[:block]) if params[:block].present?
 
-    else
-      branch = Branch.find_by_organization_id(params[:org_id]).id
-      br_dep = BranchesDepartment.where("branch_id = ?", branch)
-      i = 0
-      br_dep_id_ar = []
-      br_dep.each do |id|
-        br_dep_id_ar[i] = id.id
-        i += 1
+    elsif params[:org_id].present?
+      branch = Branch.where("organization_id = ?", params[:org_id])
+      if branch.present?
+        i = 0
+        br_ar = []
+        branch.each do |branch|
+          br_ar[i] = branch.id
+          i += 1
+        end
       end
+      br_dep = BranchesDepartment.where(branch_id: br_ar)
+      if br_dep.present?
+        i = 0
+        br_dep_id_ar = []
+        br_dep.each do |id|
+          br_dep_id_ar[i] = id.id
+          i += 1
+        end
+      end
+      # Office.extra_array(br_dep)
+
       offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
-
+      # offices = Office.using(:shard_one).all
     end
-
     return offices
   end
+
+  def self.extra_array params
+    if params.present?
+      i = 0
+      br_dep_id_ar = []
+      params.each do |param|
+        br_dep_id_ar[i] = param.id
+        i += 1
+      end
+    end
+    return br_dep_id_ar
+  end
+
+
+
+
 end
