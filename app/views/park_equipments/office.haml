@@ -57,7 +57,7 @@
 - if @offices.present? and params[:commit].present?
   %strong
     %h4
-      Результаты поиска:   #{@offices.count} кабинетов
+      -#Результаты поиска:   #{@offices.count} кабинетов
       -if @branch_name.present?
         филиал:
         #{@branch_name.short_name}

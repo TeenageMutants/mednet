@@ -22,38 +22,33 @@ class Office < ActiveRecord::Base
 
 
   def self.office_search params
-    if  params[:branch_id].present? or params[:department_id].present? or  params[:number].present? or params[:floor].present? or params[:block].present?
-      offices = Office
-      br_dep = BranchesDepartment
-      if params[:branch_id].present?
-        br_dep = br_dep.where("branch_id =?", params[:branch_id])
-      elsif params[:department_id].present?
-          br_dep = br_dep.where("department_id = ?", params[:department_id])
 
+    if params[:branch_id].present? or params[:department_id].present? or  params[:number].present? or params[:floor].present? or params[:block].present?
+      offices = Office.using(:shard_one)
+      br_dep = BranchesDepartment
+
+      br_dep = br_dep.where("branch_id =?", params[:branch_id]) if params[:branch_id].present?
+      br_dep = br_dep.where("department_id = ?", params[:department_id]) if params[:department_id].present?
+
+
+      if br_dep.present?
         i = 0
         br_dep_id_ar = []
         br_dep.each do |id|
           br_dep_id_ar[i] = id.id
           i += 1
         end
-        offices = offices.using(:shard_one).where(branches_department_id: br_dep_id_ar)
+        offices = offices.where(branches_department_id: br_dep_id_ar)
       end
 
 
-
-
-
-
-
-
-      offices= offices.where("number = ?", params[:number]) if params[:number].present?
+      offices= offices.where("lower(number) LIKE lower(?)", "%#{params[:number]}%") if params[:number].present?
       offices = offices.where("floor = ?", params[:floor]) if params[:floor].present?
       offices = offices.where("block = ?", params[:block]) if params[:block].present?
 
 
       # offices = offices.order(:number)
     else
-      # flash[:alert]= "All offices"
       branch = Branch.find_by_organization_id(params[:org_id]).id
       br_dep = BranchesDepartment.where("branch_id = ?", branch)
       i = 0
@@ -63,11 +58,7 @@ class Office < ActiveRecord::Base
         i += 1
       end
       offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
-      # if Branch.find_by_organization_id(org_id).present?
-      #
-      # end
-      # br_dep = BranchesDepartment.where("branch_id = ?", params[:branch_id]) if params[:branch].present?
-      # offices = Office.joins(br_dep).all
+
     end
     # return br_dep
     return offices
