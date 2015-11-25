@@ -5,42 +5,85 @@
 -#= render 'shared/modal_department'
 Ваша организация:
 = set_organization(current_user.id)
-%br
-.form-control
-  =form_for @office, url:office_park_equipments_path, remote: true do |f|
-    -#=f.label :number, "Номер кабинета "
-    -#=f.text_field :number
-    Выберите филиал:
-    =f.collection_select :branch, find_branches, :id, :short_name, prompt: true, remote: true, class: "form-control"
-    = f.label :dep, "Выберите отдел:", id: "label_dep"
-    =f.grouped_collection_select :department, find_branches, :departments, :short_name, :id, :name, include_blank: true
-    =link_to "Найти кабинеты", "#", remote: true, class: 'btn btn-success btn-sm', id: "find_office"
 
 
 
-- if params[:branch_id].present?
-  = params[:branch_id]
-  = params[:department_id]
+.well
+  = form_tag(request.path, method: 'post') do
+    .row
+      .col-md-5
+        = select_tag :branch_id, options_from_collection_for_select(find_branches, "id", "short_name"), prompt: "Выберите филиал", class: "form-control"
+      .col-md-5
+        = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name") , prompt: "Выберите отдел", class: "form-control"
+      .col-md-2
+      = hidden_field_tag :act, 'office_search'
+      .col-md-2
 
-#office_table{:style => "display:none"}
+        = submit_tag "Поиск", class: "btn btn-primary",data: { disable_with: "Идет поиск, подождите...".html_safe}
 
+    .row
+      .col-md-10
+      .col-md-2
+        .pull-right
+          %br
+            = link_to "Расширенный поиск", "#", {"data-target" => "#extra_search_fields", "data-toggle" => "collapse"}
+
+    #extra_search_fields.collapsible.collapse
+      %br
+      .row
+        .col-md-4
+          = label_tag :number, "Номер или название кабинета"
+          %br
+          =text_field_tag :number, params[:number], placeholder: "Наименование кабинета", class: 'form-control'
+
+          %br
+        .col-md-4
+          = label_tag :floor, 'Этаж'
+          %br
+          =text_field_tag :floor, params[:floor], placeholder: "Этаж", class: 'form-control'
+
+          %br
+        .col-md-4
+          = label_tag :block, "Корпус"
+          %br
+          = text_field_tag :block, params[:block], placeholder: "Корпус", class: "form-control"
+          %br
+      .row
+        .pull-right
+          %i
+            = link_to "Cбросить поиск", office_park_equipments_path
+
+
+- if @offices.present? and params[:commit].present?
   %strong
-    Кабинеты:
-    = :department
-    = :branch
+    %h4
+      Результаты поиска:   #{@offices.count} кабинетов
+      -if @branch_name.present?
+        филиал:
+        #{@branch_name.short_name}
+      -if @department.present?
+        отдел: #{@department.name}
+  %p
+  %table.table.table-bordered
+    %th
+      Номер кабинета
 
-  -#%table.table.table-bordered
-  -#  %tr.info
-  -#    %th Название
-  -#    %th Этаж
-  -#    %th Корпус
-  -#  %tbody
-  -#    - find_offices(params[:branch_id], params[:department_id]).each do |office|
-  -#      %tr
-  -#        %td
-  -#          = office.number
-  -#        %td
-  -#          = office.floor
-  -#
-  -#        %td
-  -#          = office.block
+
+    - @offices.each do |office|
+
+      %tr
+        %td{style: "width:80%;"}
+          -#=office.number
+          = link_to office.number.html_safe, show_office_park_equipment_path(id: office.id, branch_id: params[:branch_id], department_id: params[:department_id])
+        -#%td
+        -#  %h6
+        -#    Принят
+        -#    = I18n.l result.taken_at, format: "%d %B %Y"
+        -#    %br
+
+
+
+- elsif @offices.blank? and params[:commit].present?
+  %center
+    %h3
+      Кабинетов, удовлетворяющих вашему запросу, не нашлось.

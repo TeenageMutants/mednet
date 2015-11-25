@@ -1,29 +1,29 @@
-$(document).ready(function(){
-
-
-
-    var departments;
-    departments = $('#office_department').html();
-    $('#office_department').hide();
-    $('#find_office').hide();
-    $('#label_dep').hide();
-
-    $('#office_branch').on('click', function(){
-        var branch, options;
-        branch = $('#office_branch :selected').text();
-        options = $(departments).filter("optgroup[label='" + branch + "']").html();
-        console.log(options)
-        //console.log(branch);
-        //console.log(departments);
-        if (options) {$('#office_department').show();
-            $('#label_dep').show();
-            $('#find_office').show();
-            return $('#office_department').html(options);
-        } else { $('#office_department').hide();
-            $('#find_office').hide();
-            return $('#office_department').empty();
-        }
-    });
+//$(document).ready(function(){
+//
+//
+//
+//    var departments;
+//    departments = $('#office_department').html();
+//    $('#office_department').hide();
+//    $('#find_office').hide();
+//    $('#label_dep').hide();
+//
+//    $('#office_branch').on('click', function(){
+//        var branch, options;
+//        branch = $('#office_branch :selected').text();
+//        options = $(departments).filter("optgroup[label='" + branch + "']").html();
+//        console.log(options)
+//        //console.log(branch);
+//        //console.log(departments);
+//        if (options) {$('#office_department').show();
+//            $('#label_dep').show();
+//            $('#find_office').show();
+//            return $('#office_department').html(options);
+//        } else { $('#office_department').hide();
+//            $('#find_office').hide();
+//            return $('#office_department').empty();
+//        }
+//    });
 
 
 
@@ -53,31 +53,77 @@ $(document).ready(function(){
     //
     //});
 
-
-    var pg = require("pg");
-
-    var conString = "pg://admin:guest@localhost:5432/Employees";
-
-    var client = new pg.Client(conString);
-    client.connect();
-
-// client.query("CREATE TABLE IF NOT EXISTS emps(firstname varchar(64), lastname varchar(64))");
-// client.query("INSERT INTO emps(firstname, lastname) values($1, $2)", ['Ronald', 'McDonald']);
-// client.query("INSERT INTO emps(firstname, lastname) values($1, $2)", ['Mayor', 'McCheese']);
-
-    var query = client.query("SELECT firstname, lastname FROM emps ORDER BY lastname, firstname");
-    query.on("row", function (row, result) {
-        result.addRow(row);
-    });
-    query.on("end", function (result) {
-        console.log(JSON.stringify(result.rows, null, "    "));
-        client.end();
-    });
-
-
+//
+//    var pg = require("pg");
+//
+//    var conString = "pg://admin:guest@localhost:5432/Employees";
+//
+//    var client = new pg.Client(conString);
+//    client.connect();
+//
+//// client.query("CREATE TABLE IF NOT EXISTS emps(firstname varchar(64), lastname varchar(64))");
+//// client.query("INSERT INTO emps(firstname, lastname) values($1, $2)", ['Ronald', 'McDonald']);
+//// client.query("INSERT INTO emps(firstname, lastname) values($1, $2)", ['Mayor', 'McCheese']);
+//
+//    var query = client.query("SELECT firstname, lastname FROM emps ORDER BY lastname, firstname");
+//    query.on("row", function (row, result) {
+//        result.addRow(row);
+//    });
+//    query.on("end", function (result) {
+//        console.log(JSON.stringify(result.rows, null, "    "));
+//        client.end();
+//    });
 
 
 
 
 
-});
+
+
+//});
+
+
+//
+//
+//
+//
+//-#%br
+//-#.form-control
+//-#  =form_for @office, url:office_park_equipments_path, remote: true do |f|
+//-#    -#=f.label :number, "Номер кабинета "
+//-#    -#=f.text_field :number
+//-#    Выберите филиал:
+//    -#    =f.collection_select :branch, find_branches, :id, :short_name, prompt: true, remote: true, class: "form-control"
+//-#    = f.label :dep, "Выберите отдел:", id: "label_dep"
+//-#    =f.grouped_collection_select :department, find_branches, :departments, :short_name, :id, :name, include_blank: true
+//-#    =f.submit "Найти кабинеты"
+//-#    -#=link_to "Найти кабинеты", "#", remote: true, class: 'btn btn-success btn-sm', id: "find_office"
+//-#
+//-#
+//-#
+//-#- if params[:branch_id].present?
+//    -#  = params[:branch_id]
+//-#  = params[:department_id]
+//-#
+//-##office_table{:style => "display:none"}
+//-#
+//-#  %strong
+//-#    Кабинеты:
+//    -#    = :department
+//-#    = :branch
+//
+//-#%table.table.table-bordered
+//-#  %tr.info
+//-#    %th Название
+//-#    %th Этаж
+//-#    %th Корпус
+//-#  %tbody
+//-#    - find_offices(params[:branch_id], params[:department_id]).each do |office|
+//-#      %tr
+//-#        %td
+//-#          = office.number
+//-#        %td
+//-#          = office.floor
+//-#
+//-#        %td
+//-#          = office.block

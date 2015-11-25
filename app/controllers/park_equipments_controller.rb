@@ -16,12 +16,11 @@ class ParkEquipmentsController < ApplicationController
   def office
     @org = Organization.find(Userinfo.find_by_user_id(current_user.id).organization_id)
 
-
     # @branches = Branch.where(organization_id: @org.id)
     @departments_all = Department.all
 
-
-
+    @branch_name = Branch.find(params[:branch_id]) if params[:branch_id].present?
+    @department = Department.find(params[:department_id]) if params[:department_id].present?
     # i = 0
     # branch_id_arr = []
     # @branches.each do |br|
@@ -81,6 +80,12 @@ class ParkEquipmentsController < ApplicationController
         end
       end
 
+      if params[:act] == 'office_search'
+        flash[:notice]='search'
+        # render text: params.inspect
+        @offices = Office.office_search(params)
+        render 'office'
+      end
 
 
       # if params[:branch_id].present? and params[:department_id].present?
@@ -105,25 +110,29 @@ class ParkEquipmentsController < ApplicationController
   end
 
 
-  def search_dep
-    @data_from_select1 = params[:branch]
-    # flash[:danger]= '123'
+  # def search_dep
+  #   @data_from_select1 = params[:branch]
+  #   # flash[:danger]= '123'
+  #
+  #   # dep_id = BranchesDepartment.where(:branch_id => @data_from_select1)
+  #   # i = 0
+  #   # dep_id_arr = []
+  #   # while (i < dep_id.count) do
+  #   #   dep_id_arr[i]=dep_id.find(i+1).department_id
+  #   #   i += 1
+  #   # end
+  #   #
+  #   # @departments = Department.find(dep_id_arr)
+  #   #
+  #   # render :json => @departments.map{|c| [c.id, c.short_name]}
+  # redirect_to office_park_equipments_path
+  # end
 
-    # dep_id = BranchesDepartment.where(:branch_id => @data_from_select1)
-    # i = 0
-    # dep_id_arr = []
-    # while (i < dep_id.count) do
-    #   dep_id_arr[i]=dep_id.find(i+1).department_id
-    #   i += 1
-    # end
-    #
-    # @departments = Department.find(dep_id_arr)
-    #
-    # render :json => @departments.map{|c| [c.id, c.short_name]}
-  redirect_to office_park_equipments_path
+  def show_office
+    @office = Office.using(:shard_one).find(params[:id])
+    @branch = Branch.find(params[:branch_id])
+    @department = Department.find(params[:department_id])
   end
-
-
 
 
 

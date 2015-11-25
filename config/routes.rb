@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       # post 'search_departments'
       post 'search_dep'
     end
+    member do
+      get 'show_office'
+    end
 
   end
 
