@@ -5,54 +5,54 @@
 -#= render 'shared/modal_department'
 Ваша организация:
 = set_organization(current_user.id)
-
-
-
-.well
-  = form_tag(request.path, method: 'post') do
-    .row
-      .col-md-5
-        = select_tag :branch_id, options_from_collection_for_select(find_branches, "id", "short_name"), prompt: "Выберите филиал", class: "form-control"
-      .col-md-5
-        = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name") , prompt: "Выберите отдел", class: "form-control"
-      .col-md-2
-      = hidden_field_tag :act, 'office_search'
-      = hidden_field_tag :organizat_id, org_id
-      .col-md-2
-
-        = submit_tag "Поиск", class: "btn btn-primary",data: { disable_with: "Идет поиск, подождите...".html_safe}
-
-    .row
-      .col-md-10
-      .col-md-2
-        .pull-right
-          %br
-            = link_to "Расширенный поиск", "#", {"data-target" => "#extra_search_fields", "data-toggle" => "collapse"}
-
-    #extra_search_fields.collapsible.collapse
-      %br
+%br
+= link_to "Показать форму поиска", "#",  {"data-target" => "#search_fields", "data-toggle" => "collapse", class: "btn btn-primary"}
+#search_fields.collapsible.collapse
+  .well
+    = form_tag(request.path, method: 'post') do
       .row
-        .col-md-4
-          = label_tag :number, "Номер или название кабинета"
-          %br
-          =text_field_tag :number, params[:number], placeholder: "Наименование кабинета", class: 'form-control'
+        .col-md-5
+          = select_tag :branch_id, options_from_collection_for_select(find_branches, "id", "short_name"), prompt: "Выберите филиал", class: "form-control"
+        .col-md-5
+          = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name") , prompt: "Выберите отдел", class: "form-control"
+        .col-md-2
+        = hidden_field_tag :act, 'office_search'
+        -#= hidden_field_tag :organizat_id, org_id
+        .col-md-2
 
-          %br
-        .col-md-4
-          = label_tag :floor, 'Этаж'
-          %br
-          =text_field_tag :floor, params[:floor], placeholder: "Этаж", class: 'form-control'
+          = submit_tag "Поиск", class: "btn btn-primary",data: { disable_with: "Идет поиск, подождите...".html_safe}
 
-          %br
-        .col-md-4
-          = label_tag :block, "Корпус"
-          %br
-          = text_field_tag :block, params[:block], placeholder: "Корпус", class: "form-control"
-          %br
       .row
-        .pull-right
-          %i
-            = link_to "Cбросить поиск", office_park_equipments_path
+        .col-md-10
+        .col-md-2
+          .pull-right
+            %br
+              = link_to "Расширенный поиск", "#", {"data-target" => "#extra_search_fields", "data-toggle" => "collapse"}
+
+      #extra_search_fields.collapsible.collapse
+        %br
+        .row
+          .col-md-4
+            = label_tag :number, "Номер или название кабинета"
+            %br
+            =text_field_tag :number, params[:number], placeholder: "Наименование кабинета", class: 'form-control'
+
+            %br
+          .col-md-4
+            = label_tag :floor, 'Этаж'
+            %br
+            =text_field_tag :floor, params[:floor], placeholder: "Этаж", class: 'form-control'
+
+            %br
+          .col-md-4
+            = label_tag :block, "Корпус"
+            %br
+            = text_field_tag :block, params[:block], placeholder: "Корпус", class: "form-control"
+            %br
+        .row
+          .pull-right
+            %i
+              = link_to "Cбросить поиск", office_park_equipments_path
 
 
 -if params[:commit].present?

@@ -63,25 +63,15 @@ class Office < ActiveRecord::Base
           i += 1
         end
       end
-      # Office.extra_array(br_dep)
 
       offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
-      # offices = Office.using(:shard_one).all
+
     end
     return offices
   end
 
-  def self.extra_array params
-    if params.present?
-      i = 0
-      br_dep_id_ar = []
-      params.each do |param|
-        br_dep_id_ar[i] = param.id
-        i += 1
-      end
-    end
-    return br_dep_id_ar
-  end
+
+
 
 
 
