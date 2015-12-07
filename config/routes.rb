@@ -16,13 +16,14 @@ Rails.application.routes.draw do
       get 'search_office'
       post 'search_office'
       get 'add_office'
-      post 'add_office'
+
       get 'delete_office'
 
 
     end
     member do
       get 'show_office'
+      get 'edit_office'
     end
 
   end

@@ -109,6 +109,37 @@ class ParkEquipmentsController < ApplicationController
     redirect_to office_park_equipments_path
   end
 
+  def edit_office
+    @office = Office.using(:shard_one).find(params[:id])
+    @office_br_dep_id = @office.branches_department_id
+
+
+    @branch_id = BranchesDepartment.find(@office_br_dep_id).branch_id
+    @department_id = BranchesDepartment.find(@office_br_dep_id).department_id
+
+    @branches_department = BranchesDepartment.where(branch_id: @branch_id, department_id: @department_id).first
+    @br_dep_id = @branches_department.id
+
+    if params[:commit] == 'изменить кабинет'
+      unless @branch_id == params[:branch] and @department_id == params[:department]
+        if @bra_dep = BranchesDepartment.where(branch_id: params[:branch], department_id: params[:department]).first.present?
+          @branch_department = BranchesDepartment.where(branch_id: params[:branch], department_id: params[:department]).first
+        else
+          @branch_department = BranchesDepartment.create(branch_id: params[:branch], department_id: params[:department])
+        end
+
+        @br_dep_id = @branch_department.id
+      end
+      @office = @office.update_attributes!(branches_department_id: @br_dep_id, number: params[:number],
+                                           floor: params[:floor], block: params[:block], is_deleted: false)
+
+      flash[:success] = "Запись для кабинета обновлена"
+
+      redirect_to office_park_equipments_path
+    end
+
+  end
+
 
   private
     def office_params

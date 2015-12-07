@@ -54,7 +54,7 @@ module ParkEquipmentsHelper
     br_dep_id.each do |id|
       br_dep_id_ar << id.id
     end
-    @offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
+    @offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar, is_deleted: false)
     return @offices
   end
 

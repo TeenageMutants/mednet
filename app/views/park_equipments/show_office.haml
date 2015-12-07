@@ -1,5 +1,4 @@
 = render 'menu'
-'
 Ваша организация:
 = set_organization(current_user.id)
 %br
@@ -12,4 +11,4 @@
 Кабинет
 = @office.number.html_safe
 - if @office.present?
-  =link_to "Удалить кабинет", delete_office_park_equipments_path(id: params[:id])
+  =link_to "Удалить кабинет", delete_office_park_equipments_path(id: params[:id]), data: {confirm: "Точно удалить?"}

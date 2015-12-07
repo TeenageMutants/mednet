@@ -1,19 +1,4 @@
 = render 'menu'
-
-
-
-.well-sm
-  -if @department_id.present?
-    =@department_id
-
-  -if @branch_id.present?
-    =@branch_id
-  метка2
-  - if @bra_dep.present?
-    метка
-    =@bra_dep.each do |b|
-      =b.id
-
 .form-control
   = form_tag(add_office_park_equipments_path, method: 'get') do
     = label_tag :branch_id, "Выберите филиал"
