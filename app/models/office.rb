@@ -30,11 +30,10 @@ class Office < ActiveRecord::Base
 
 
       if br_dep.present?
-        i = 0
+
         br_dep_id_ar = []
         br_dep.each do |id|
-          br_dep_id_ar[i] = id.id
-          i += 1
+          br_dep_id_ar <<  id.id
         end
         offices = offices.where(branches_department_id: br_dep_id_ar)
       end
@@ -47,25 +46,19 @@ class Office < ActiveRecord::Base
     elsif params[:org_id].present?
       branch = Branch.where("organization_id = ?", params[:org_id])
       if branch.present?
-        i = 0
         br_ar = []
         branch.each do |branch|
-          br_ar[i] = branch.id
-          i += 1
+          br_ar << branch.id
         end
       end
       br_dep = BranchesDepartment.where(branch_id: br_ar)
       if br_dep.present?
-        i = 0
         br_dep_id_ar = []
         br_dep.each do |id|
-          br_dep_id_ar[i] = id.id
-          i += 1
+          br_dep_id_ar << id.id
         end
       end
-
       offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
-
     end
     return offices
   end

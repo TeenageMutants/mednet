@@ -1,29 +1,24 @@
-#modal_branch.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_branch.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modal_branch", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
-    .modal-content
-      = form_tag(office_park_equipments_path, :method => 'post')
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#modal_branch.modal-title
-      .modal-body
-        .form-group
+    = form_for Branch.new, url: {action: "create_branch"}, method: 'post' do |f|
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#modal_branch.modal-title
+        .modal-body
 
-          = label_tag "Сокращенное филиала"
+          = f.label :short_name, "Сокращенное название филиала"
+          = f.text_field :short_name
           %br
-          = text_field_tag :short_name
+          = f.label :full_name, "Полное название филиала"
+          = f.text_field :full_name
           %br
-          = label_tag "Полное название филиала"
+          = f.label :senior_phone, "Контактный телефон"
+          = f.text_field :senior_phone
           %br
-          = text_field_tag :full_name
+          = f.label :address, "Почтовый адрес"
+          = f.text_field :address
+          = f.hidden_field :organization_id, :value => org_id
           %br
-          = label_tag "Контактный телефон"
-          %br
-          = text_field_tag :senior_phone
-          %br
-          = label_tag "Адрес филиала"
-          %br
-          = text_field_tag :address
-          = hidden_field_tag :organization_id, Userinfo.find_by_user_id(current_user.id).organization_id
-          = hidden_field_tag :act, 'create_branch'
-        = submit_tag "Сохранить"
+        = f.submit "добавить филиал"

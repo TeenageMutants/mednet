@@ -1,8 +1,5 @@
 = render 'menu'
--#= render 'shared/modal_office'
--#= render 'shared/modal_branch'
--#= render 'shared/modal_department'
--#= render 'shared/modal_department'
+'
 Ваша организация:
 = set_organization(current_user.id)
 %br
@@ -14,3 +11,5 @@
 %br
 Кабинет
 = @office.number.html_safe
+- if @office.present?
+  =link_to "Удалить кабинет", delete_office_park_equipments_path(id: params[:id])

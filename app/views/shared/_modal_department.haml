@@ -1,25 +1,37 @@
-#modal_department.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
-    = form_tag(office_park_equipments_path, :method => 'post')
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#modal_department.modal-title
-      .modal-body
-        .form-group
-          Отметьте нужные отделы для добавления в вашу организацию
-          - @departments_all.each do |department|
-            %table.table.table-striped
-              %tr
-                %td
-                  = department.name
-                  = hidden_field_tag :department_id, department.id
-                  = hidden_field_tag :org_id, org_id
-                  -#= hidden_field_tag :branch_id, branch_id
+-##modal_department.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "modal_department", :role => "dialog", :tabindex => "-1"}
+-#  .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
+-#    .modal-content
+-#      = form_tag(create_branch_park_equipments_path, :method => 'post')
+-#      .modal-header
+-#        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+-#          %span{"aria-hidden" => "true"} ×
+-#        %h4#modal_department.modal-title
+-#      .modal-body
+-#        .form-group
+-#          = label_tag :branch_id, "Выберите филиал"
+-#          %br
+-#          = select_tag :branch_id, options_from_collection_for_select(find_branches,  "id", "short_name")
+-#          = label_tag :department_id, "Выберите нужный отделы для добавления в вашу организацию"
+-#          %br
+-#          = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name"),
+-#          prompt: "Выберите отдел", class: "form-control"
+-#          = hidden_field_tag :org_id, org_id
+-#        = submit_tag "добавить отдел"
 
-                %td
-                  = check_box_tag :check, name: "check"
-                  =hidden_field_tag :act, "add_departments"
-          = submit_tag "Добавить отделы"
-          -#= form_for @departments, url: office_park_equipments_path, :method => 'post' do |f|
+#modal_department.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modal_department", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
+    = form_for BranchesDepartment.new, url: {action: "create_department"}, method: 'post' do |f|
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#modal_office.modal-title
+        .modal-body
+          = f.label :branch_id, "Выберите филиал"
+          = f.select :branch_id, options_from_collection_for_select(find_branches,  "id", "short_name")
+          %br
+          = f.label :department_id, "Выберите отдел для добавления"
+          = f.select :department_id, options_from_collection_for_select(Department.all, "id", "name")
+          %br
+          %br
+        = f.submit "добавить филиал"

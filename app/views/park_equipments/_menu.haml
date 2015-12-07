@@ -1,12 +1,23 @@
 .well
   .navbar-collapse.collapse
     %ul.nav.navbar-nav
-      %li
-        = link_to "Кабинет", office_park_equipments_path, class: "btn btn-primary"
-        -#= link_to "#", "data-target" => "#myModalOffice", "data-toggle" => "modal" do
-        -#= link_to "#", class: "btn btn-primary", "data-target" => "#modal_office", "data-toggle" => "modal" do
-        -#  Создать кабинет
-        -#%a
+
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Кабинеты
+          %b.caret
+        %ul.dropdown-menu
+          %li.divider
+          %li.dropdown-header Кабинеты
+          %li
+            =link_to "Список кабинетов организации", office_park_equipments_path
+          %li
+            =link_to "Добавить кабинет", "#modal_office", "data-toggle" => "modal"
+            -#%a{:href => "#"} Создать кабинет
+          %li
+            = link_to "Поиск по кабинетам", search_office_park_equipments_path
+
+
       %li
         %a{:href => "#"} Создать конфигурацию оборудования
       %li

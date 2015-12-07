@@ -19,113 +19,23 @@ class ParkEquipmentsController < ApplicationController
     # @branches = Branch.where(organization_id: @org.id)
     @departments_all = Department.all
 
-    @branch_name = Branch.find(params[:branch_id]) if params[:branch_id].present?
+    # @branch_name = Branch.find(params[:branch_id]) if params[:branch_id].present?
     @department = Department.find(params[:department_id]) if params[:department_id].present?
-    # i = 0
-    # branch_id_arr = []
-    # @branches.each do |br|
-    #   branch_id_arr[i] = br.id
-    #   i += 1
-    # end
-    # departments = BranchesDepartment.where(branch_id:[branch_id_arr])
-    #
-    # i = 0
-    # dep_id_arr = []
-    # departments.each do |dep|
-    #   dep_id_arr[i] = dep.department_id
-    #   i += 1
-    # end
-    # @departments = Department.find(dep_id_arr)
 
 
-
-
-
-    Octopus.using(:shard_one) do
-      @office = Office.new
-      if params[:act] == 'create_office'
-        # render text: params.inspect
-        @office = Office.create(office_params)
-        if @office.errors.present?
-          flash[:danger] = "Ошибки при заполнении формы"
-          redirect_to office_park_equipments_path
-        end
-      end
-    end
-
-    @branch = Branch.new
-
-    if params[:commit].present?
-      if params[:act] == 'create_branch'
-        Branch.add_branch(params)
-
-        # @branch = Branch.create(organization_id: params[:organization_id], short_name: params[:short_name],
-        #                         full_name: params[:full_name], senior_phone: params[:senior_phone],
-        #                         address: params[:address])
-        if @branch.errors.present?
-          flash[:danger] = "Ошибки при заполнении формы"
-          redirect_to office_park_equipments_path
-        end
-        redirect_to office_park_equipments_path
-      end
-
-      if params[:act] == 'create_department'
-        flash[:success] = "Отделы добавлены"
-        redirect_to office_park_equipments_path
-      end
-
-      if params[:act] == 'add_departments'
-        if params[:check].present?
-          render text: params.inspect
-        end
-      end
-
-      if params[:act] == 'office_search'
-        # render text: params.inspect
-        @offices = Office.office_search(params)
-        render 'office'
-      end
-
-
-      # if params[:branch_id].present? and params[:department_id].present?
-      #   br_dep_id = BranchesDepartment.where("branch_id=? AND department_id=?", branch_id, department_id)
-      #
-      #   i = 0
-      #   br_dep_id_ar = []
-      #   br_dep_id.each do |id|
-      #     br_dep_id_ar[i] = id.id
-      #     i += 1
-      #   end
-      #   @offices = Office.using(:shard_one).where(branches_department_id: br_dep_id_ar)
-      #   # return @offices
-      # end
-    end
-
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
 
   end
 
 
-  # def search_dep
-  #   @data_from_select1 = params[:branch]
-  #   # flash[:danger]= '123'
-  #
-  #   # dep_id = BranchesDepartment.where(:branch_id => @data_from_select1)
-  #   # i = 0
-  #   # dep_id_arr = []
-  #   # while (i < dep_id.count) do
-  #   #   dep_id_arr[i]=dep_id.find(i+1).department_id
-  #   #   i += 1
-  #   # end
-  #   #
-  #   # @departments = Department.find(dep_id_arr)
-  #   #
-  #   # render :json => @departments.map{|c| [c.id, c.short_name]}
-  # redirect_to office_park_equipments_path
-  # end
+  def search_office
+    if params[:commit].present?
+      flash[:success] == "Search"
+      # render text: params.inspect
+      @offices = Office.office_search(params)
+      render 'search_office'
+    end
+  end
+
 
   def show_office
     @office = Office.using(:shard_one).find(params[:id])
@@ -135,7 +45,69 @@ class ParkEquipmentsController < ApplicationController
     @department = Department.find(br_dep.department_id)
   end
 
+  # def create_office
+  #   if params[:commit] == 'добавить кабинет'
+  #     # render text: params.inspect
+  #     # @office_branch_department_id = BranchesDepartment.find_by_branch_id(params[:office_branch_id])
+  #     flash[:danger] = "Запись для кабинета создана"
+  #     # render text: params.inspect
+  #     # if @branch_department.errors.present?
+  #     #   flash[:danger] = "Ошибки при заполнении формы"
+  #     # end
+  #     redirect_to office_park_equipments_path
+  #   end
+  # end
 
+  def create_branch
+    if params[:commit] == 'добавить филиал'
+        @branch = Branch.create(branch_params)
+        flash[:danger] = "Запись для филиала создана"
+        # render text: params.inspect
+        if @branch.errors.present?
+          flash[:danger] = "Ошибки при заполнении формы"
+        end
+       redirect_to office_park_equipments_path
+    end
+  end
+
+
+  def create_department
+    if params[:commit].present?
+      @branch_department = BranchesDepartment.create(branches_department_params)
+      flash[:danger] = "Запись связки создана"
+      # render text: params.inspect
+      if @branch_department.errors.present?
+        flash[:danger] = "Ошибки при заполнении формы"
+      end
+    end
+    redirect_to office_park_equipments_path
+  end
+
+  def add_office
+    if params[:commit] == 'добавить кабинет'
+      department_id = params.require(:department).require(:branch_id).to_i
+      @bra_dep = BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first
+
+      @office = Office.using(:shard_one).create(branches_department_id: @bra_dep.id, number: params[:number],
+          floor: params[:floor], block: params[:block], is_deleted: false)
+
+      flash[:danger] = "Запись для кабинета создана"
+
+      if @office.errors.present?
+        flash[:danger] = "Ошибки при заполнении формы кабинета"
+      end
+      redirect_to office_park_equipments_path
+    end
+
+  end
+
+  def delete_office
+    @office = Office.using(:shard_one).find(params[:id])
+
+    @office.update_attributes!(id: params[:id], is_deleted: true)
+
+    redirect_to office_park_equipments_path
+  end
 
 
   private
@@ -147,8 +119,9 @@ class ParkEquipmentsController < ApplicationController
       params.require(:branch).permit!
     end
 
-
-
+    def branches_department_params
+      params.require(:branches_department).permit!
+    end
 
 
 end
