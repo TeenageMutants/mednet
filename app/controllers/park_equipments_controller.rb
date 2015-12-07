@@ -117,23 +117,19 @@ class ParkEquipmentsController < ApplicationController
     @branch_id = BranchesDepartment.find(@office_br_dep_id).branch_id
     @department_id = BranchesDepartment.find(@office_br_dep_id).department_id
 
-    @branches_department = BranchesDepartment.where(branch_id: @branch_id, department_id: @department_id).first
-    @br_dep_id = @branches_department.id
+
 
     if params[:commit] == 'изменить кабинет'
-      unless @branch_id == params[:branch] and @department_id == params[:department]
-        if @bra_dep = BranchesDepartment.where(branch_id: params[:branch], department_id: params[:department]).first.present?
-          @branch_department = BranchesDepartment.where(branch_id: params[:branch], department_id: params[:department]).first
-        else
-          @branch_department = BranchesDepartment.create(branch_id: params[:branch], department_id: params[:department])
-        end
-
-        @br_dep_id = @branch_department.id
+      department_id = params.require(:department).require(:branch_id).to_i
+      if BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first.present?
+        @bra_dep = BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first
+        @office = @office.update_attributes!(branches_department_id: @bra_dep.id, number: params[:number],
+                                             floor: params[:floor], block: params[:block], is_deleted: false)
+        flash[:success] = "Запись для кабинета обновлена"
+      else
+        flash[:danger] = "Проверьте заданные параметры. Для вашей организации не задано такого сочетания филиала и отдела"
       end
-      @office = @office.update_attributes!(branches_department_id: @br_dep_id, number: params[:number],
-                                           floor: params[:floor], block: params[:block], is_deleted: false)
 
-      flash[:success] = "Запись для кабинета обновлена"
 
       redirect_to office_park_equipments_path
     end
