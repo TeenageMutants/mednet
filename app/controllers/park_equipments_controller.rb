@@ -104,7 +104,8 @@ class ParkEquipmentsController < ApplicationController
 
   def add_office
     @office = Office.using(:shard_one).new
-    if params[:commit] == 'добавить кабинет'
+    @branch_id = Branch.new
+    if params[:commit] == 'сохранить'
       department_id = params.require(:department).require(:branch_id).to_i
       @bra_dep = BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first
 
@@ -139,7 +140,7 @@ class ParkEquipmentsController < ApplicationController
 
 
 
-    if params[:commit] == 'изменить кабинет'
+    if params[:commit] == 'сохранить'
       department_id = params.require(:department).require(:branch_id).to_i
       if BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first.present?
         @bra_dep = BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first

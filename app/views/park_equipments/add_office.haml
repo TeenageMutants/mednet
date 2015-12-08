@@ -4,56 +4,8 @@
     Создание записи о кабинете
 .form-group
   = form_tag(add_office_park_equipments_path, method: 'get') do
-    .form-control
-      = label_tag :branch_id, "Выберите филиал"
-      = select_tag :branch, options_from_collection_for_select(find_branches, :id, :short_name)
-      = label_tag :dep, "Выберите отдел:", id: "label_dep"
-      = grouped_collection_select(:department, :branch_id, find_branches, :departments, :short_name, :id, :name)
-
-      .form-inline
-        .form-group
-          = label_tag :number, "Номер кабинета"
-          %br
-          = text_field_tag :number
-        .form-group
-          = label_tag :floor, "Этаж"
-          %br
-          = text_field_tag :floor
-        .form-group
-          = label_tag :block, "Корпус"
-          %br
-          = text_field_tag :block
-      = submit_tag "добавить кабинет", class: "btn btn-primary"
+    = render 'office'
 
 
--#%strong
--#.text-center
--#  Создание записи кабинета
--#.form-group
--#  = form_tag(add_office_park_equipment_path, method: 'get') do
--#
--#    = label_tag :branch, "Выберите филиал"
--#    = select_tag :branch, options_from_collection_for_select(find_branches, :id, :short_name, @branch_id), class: "form-control"
--#    .form-control
--#      = label_tag :dep, "Выберите отдел:", id: "label_dep"
--#      = grouped_collection_select(:department, :branch_id, find_branches, :departments, :short_name, :id, :name)
--#
--#
--#    -#= label_tag :department, "Выберите отдел:", id: "label_dep"
--#    -#= select_tag :department, options_from_collection_for_select(Department.all, :id, :name, @department_id), class: "form-control"
--#    .form-inline
--#      .form-group
--#        = label_tag :number, "Номер кабинета"
--#        %br
--#        = text_field_tag :number, @office.number, class: "form-control"
--#      .form-group
--#        = label_tag :floor, "Этаж"
--#        %br
--#        = text_field_tag :floor, @office.floor, class: "form-control"
--#      .form-group
--#        = label_tag :block, "Корпус"
--#        %br
--#        = text_field_tag :block, @office.block, class: "form-control"
--#
--#    = submit_tag "создать кабинет", class: "btn btn-primary"
+
 

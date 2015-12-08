@@ -1,0 +1,20 @@
+.form-control
+  = label_tag :branch_id, "Выберите филиал"
+  = select_tag :branch, options_from_collection_for_select(find_branches, :id, :short_name, @branch_id)
+  = label_tag :dep, "Выберите отдел:", id: "label_dep"
+  = grouped_collection_select(:department, :branch_id, find_branches, :departments, :short_name, :id, :name)
+
+  .form-inline
+    .form-group
+      = label_tag :number, "Номер кабинета"
+      %br
+      = text_field_tag :number, @office.number, class: "form-control"
+    .form-group
+      = label_tag :floor, "Этаж"
+      %br
+      = text_field_tag :floor, @office.floor, class: "form-control"
+    .form-group
+      = label_tag :block, "Корпус"
+      %br
+      = text_field_tag :block, @office.block, class: "form-control"
+  = submit_tag "сохранить", class: "btn btn-primary"
