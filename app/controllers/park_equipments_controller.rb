@@ -61,7 +61,7 @@ class ParkEquipmentsController < ApplicationController
   def create_branch
     if params[:commit] == 'добавить филиал'
         @branch = Branch.create(branch_params)
-        flash[:danger] = "Запись для филиала создана"
+        flash[:success] = "Запись для филиала создана"
         # render text: params.inspect
         if @branch.errors.present?
           flash[:danger] = "Ошибки при заполнении формы"
@@ -70,11 +70,15 @@ class ParkEquipmentsController < ApplicationController
     end
   end
 
+  def show_branch
+    @branch = Branch.find(params[:id])
+  end
+
 
   def create_department
     if params[:commit].present?
       @branch_department = BranchesDepartment.create(branches_department_params)
-      flash[:danger] = "Запись связки создана"
+      flash[:success] = "Запись связки создана"
       # render text: params.inspect
       if @branch_department.errors.present?
         flash[:danger] = "Ошибки при заполнении формы"
@@ -91,7 +95,7 @@ class ParkEquipmentsController < ApplicationController
       @office = Office.using(:shard_one).create(branches_department_id: @bra_dep.id, number: params[:number],
           floor: params[:floor], block: params[:block], is_deleted: false)
 
-      flash[:danger] = "Запись для кабинета создана"
+      flash[:success] = "Запись для кабинета создана"
 
       if @office.errors.present?
         flash[:danger] = "Ошибки при заполнении формы кабинета"

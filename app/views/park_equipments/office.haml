@@ -3,33 +3,27 @@
 = render 'shared/modal_branch'
 = render 'shared/modal_department'
 
-
-= set_organization(current_user.id)
-%br
--if @office_branch.present?
-  =@office_branch
--if @branch_department_id.present?
-  =@branch_department_id.each do |d_b|
-    =d_b.department_id
-    %br
-
 %br
 -if find_branches.present?
   -unless branch_only_one(org_id)
-    = link_to "add branch", "#modal_branch", class: "btn btn-primary", "data-toggle" => "modal"
+    %p{:align => "right"}
+      = link_to "добавить филиал", "#modal_branch", class: "btn btn-primary", "data-toggle" => "modal"
 
-    = link_to "add dep", "#modal_department",class: "btn btn-primary", "data-toggle" => "modal"
+      = link_to "добавить отдел", "#modal_department",class: "btn btn-primary", "data-toggle" => "modal"
 
-    = link_to "add office", add_office_park_equipments_path, class: "btn btn-primary"
-    %br
+      = link_to "добавить кабинет", add_office_park_equipments_path, class: "btn btn-primary"
+      %br
 
-
-    Структура учреждения  #{set_organization(current_user.id)}:
+    %h3
+      %center
+        Структура учреждения  #{set_organization(current_user.id)}
     %br
     .well
       .field_input
         -find_branches.each do |branch|
           Филиал: #{branch.short_name}
+          =link_to show_branch_park_equipment_path(id: branch.id), class: "btn btn-sm btn-success" do
+            %i.fa.fa.fa-search-plus
           %br
           .well
             -find_departments(branch.id).each do |department|

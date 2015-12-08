@@ -8,17 +8,18 @@
           %h4#modal_branch.modal-title
         .modal-body
 
-          = f.label :short_name, "Сокращенное название филиала"
-          = f.text_field :short_name
-          %br
-          = f.label :full_name, "Полное название филиала"
-          = f.text_field :full_name
-          %br
-          = f.label :senior_phone, "Контактный телефон"
-          = f.text_field :senior_phone
-          %br
-          = f.label :address, "Почтовый адрес"
-          = f.text_field :address
-          = f.hidden_field :organization_id, :value => org_id
-          %br
-        = f.submit "добавить филиал"
+          .form-group
+            = f.label :short_name, "Сокращенное название филиала"
+            = f.text_field :short_name, class: "form-control"
+          .form-group
+            = f.label :full_name, "Полное название филиала"
+            = f.text_field :full_name, class: "form-control"
+          .form-group
+            = f.label :senior_phone, "Контактный телефон"
+            = f.text_field :senior_phone, class: "form-control"
+          .form-group
+            = f.label :address, "Почтовый адрес"
+            = f.text_field :address, class: "form-control"
+            = f.hidden_field :organization_id, :value => org_id
+          .form-group
+            = f.submit "добавить филиал", class: "btn btn-primary"
