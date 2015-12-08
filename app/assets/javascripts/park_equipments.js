@@ -13,7 +13,7 @@ $(document).ready(function(){
     departments = $('#department_branch_id').html();
     $('#department_branch_id').hide();
     //$('#find_office').hide();
-    //$('#label_dep').hide();
+    $('#label_dep').hide();
 
     $('#branch').on('click', function(){
         console.log('click');
@@ -27,7 +27,7 @@ $(document).ready(function(){
         //console.log(departments);
         console.log(dep);
         if (options) {$('#department_branch_id').show();
-            //$('#label_dep').show();
+            $('#label_dep').show();
             //$('#find_office').show();
             return $('#department_branch_id').html(options);
         } else { $('#department_branch_id').hide();
