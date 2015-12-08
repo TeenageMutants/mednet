@@ -123,6 +123,12 @@ gem 'simple_form'
 gem 'carmen-rails'
 gem 'jquery-ui-rails'
 
+gem 'best_in_place', github: 'aaronchi/best_in_place'
+gem 'bootstrap-editable-rails'
+
+gem "therubyracer"
+gem "less-rails"
+
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl'

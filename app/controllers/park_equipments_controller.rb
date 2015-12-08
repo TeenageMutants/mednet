@@ -73,6 +73,21 @@ class ParkEquipmentsController < ApplicationController
   def show_branch
     @branch = Branch.find(params[:id])
   end
+  respond_to :html, :json
+
+  def edit_branch
+    @branch = Branch.find(params[:id])
+    respond_to do |format|
+      if @branch.update_attributes(branch_params)
+        format.html { redirect_to(@branch, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@branch) }
+      else
+        format.html { render :action => "edit_branch" }
+        format.json { respond_with_bip(@branch) }
+      end
+    end
+
+  end
 
 
   def create_department

@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/aaronchi/best_in_place.git
+  revision: 1152e2256afd485e66602833fd99d09d60994841
+  specs:
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (>= 3.1)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 1d93c5a77049b3d21d17c847ad0531d7714fa229
   branch: bootstrap3
@@ -63,6 +71,9 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-editable-rails (0.0.9)
+      railties (>= 3.1)
+      sass-rails
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
@@ -426,7 +437,9 @@ DEPENDENCIES
   ancestry
   ar-octopus
   asset-image-opt
+  best_in_place!
   binding_of_caller
+  bootstrap-editable-rails
   bootstrap-sass (~> 3.3.3)
   bootstrap-will_paginate
   bootstrap3-datetimepicker-rails (~> 4.7.14)

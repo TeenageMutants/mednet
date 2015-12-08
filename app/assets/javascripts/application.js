@@ -19,3 +19,10 @@
 
 
 //= require jquery-ui
+
+//= require bootstrap
+//= require jquery.purr
+//= require best_in_place
+
+//= require bootstrap-editable
+//= require bootstrap-editable-rails

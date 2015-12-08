@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     member do
       get 'show_office'
       get 'edit_office'
+      put 'edit_office'
       get 'show_branch'
+      get 'edit_branch'
+      put 'edit_branch'
+
     end
 
   end

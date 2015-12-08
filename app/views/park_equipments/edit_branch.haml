@@ -1,0 +1,17 @@
+= render 'menu'
+= form_for @branch, url: {action: "edit_branch"}, method: 'get' do |f|
+  .form-group
+    = f.label :short_name, "Сокращенное название филиала"
+    = f.text_field :short_name, class: "form-control"
+  .form-group
+    = f.label :full_name, "Полное название филиала"
+    = f.text_field :full_name, class: "form-control"
+  .form-group
+    = f.label :senior_phone, "Контактный телефон"
+    = f.text_field :senior_phone, class: "form-control"
+  .form-group
+    = f.label :address, "Почтовый адрес"
+    = f.text_field :address, class: "form-control"
+    = f.hidden_field :organization_id, :value => org_id
+  .form-group
+    = f.submit "изменить филиал", class: "btn btn-primary"
