@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'office'
       post 'search_dep'
       post 'create_branch'
+      get 'create_branch'
       post 'create_department'
       get 'search_office'
       post 'search_office'

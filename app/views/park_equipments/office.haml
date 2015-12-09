@@ -61,16 +61,61 @@
                 -else
                   Кабинетов нет
 
+  -else
+    Создавайте отделы и кабинеты для вашей организации
+    %p{:align => "right"}
+      = link_to "добавить отдел", "#modal_department",class: "btn btn-primary", "data-toggle" => "modal"
+
+      = link_to "добавить кабинет", add_office_park_equipments_path, class: "btn btn-primary"
+      %br
+    .well
+      .field_input
+        -if find_departments_no_branches.present?
+          -find_departments_no_branches.each do |department|
+            =department.name
+            %br
+            .well
+              -if find_offices(Branch.find_by_organization_id(org_id).id, department.id).present?
+                %table.table.active
+                  %tr.info
+                    %th Номер кабинета
+                    %th Корпус
+                    %th Этаж
+                    %th Редакция
+                  %tbody
+
+                    -find_offices(Branch.find_by_organization_id(org_id).id, department.id).each do |office|
+                      %tr
+                        %td
+                          =link_to  "#{office.number}", show_office_park_equipment_path(office.id)
+                        %td
+                          =office.block
+                        %td
+                          =office.floor
+                        %td
+                          = link_to edit_office_park_equipment_path(id: office.id), class: "btn btn-sm btn-warning" do
+                            %i.fa.fa.fa-pencil-square-o
+
+                          = link_to delete_office_park_equipments_path(id: office.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
+                            %i.fa.fa.fa-trash-o
+
+                          =link_to show_office_park_equipment_path(id: office.id), class: "btn btn-sm btn-success" do
+                            %i.fa.fa.fa-search-plus
+
+
+              -else
+                Кабинетов нет
+        - else
+          Отделов нет
 -else
   Пока не создано ни одного филиала для вашей организации.
   %br
   Если у вашей организации нет филиалов, нажмите кнопку
-  =link_to "Филиалов не существует", office_park_equipments_path(commit: true , act: "create_branch",
+  =link_to "Филиалов не существует", office_park_equipments_path(commit: "филиалов нет",
   organization_id: org_id,  short_name: Organization.find(org_id).short_name,
   full_name:  Organization.find(org_id).full_name, senior_phone: Organization.find(org_id).reception_phone,
   address: Organization.find(org_id).address), class: "btn btn-primary", data: { confirm: "Точно нет филиалов?"}
   %br
   Если  в вашей организации присутствуют филиалы, то их можно задать, нажав кнопку
-  = link_to "#", class: "btn btn-primary", "data-target" => "#modal_branch", "data-toggle" => "modal" do
-    Добавить филиал
+  = link_to "добавить филиал", "#modal_branch", class: "btn btn-primary", "data-toggle" => "modal"
 %br

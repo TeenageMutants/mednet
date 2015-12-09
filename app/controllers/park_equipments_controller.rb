@@ -16,13 +16,19 @@ class ParkEquipmentsController < ApplicationController
     @org = Organization.find(Userinfo.find_by_user_id(current_user.id).organization_id)
     @departments_all = Department.all
     @department = Department.find(params[:department_id]) if params[:department_id].present?
+    if params[:commit] == "филиалов нет"
+      @branch = Branch.add_branch(params)
+      if @branch.errors.present?
+        flash[:danger] = "Ошибки при заполнении формы"
+      end
+      redirect_to office_park_equipments_path
+    end
   end
 
 
   def search_office
     @offices = []
     if params[:commit].present?
-
       # render text: params.inspect
       @offices = Office.office_search(params)
       render 'search_office'

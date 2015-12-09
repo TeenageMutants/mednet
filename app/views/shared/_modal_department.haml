@@ -8,7 +8,7 @@
           %h4#modal_office.modal-title
         .modal-body
           .form-group
-            = f.label :branch_id, "Выберите филиал"
+            = f.label :branch_id, "Выберите филиал(организацию, если нет филиалов)"
             = f.select :branch_id, options_from_collection_for_select(find_branches,  "id", "short_name")
           .form-group
             = f.label :department_id, "Выберите отдел для добавления"
