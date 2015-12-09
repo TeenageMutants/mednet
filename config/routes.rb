@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   root 'main#index'
 
+
+  # get '/park_equipments/official', to: 'park_equipments#official'
+
   devise_for :users
 
   resources :park_equipments, :only => :index do
     collection do
       get 'office'
       post 'office'
-      # post 'search_departments'
       post 'search_dep'
+      get 'official'
+      post 'official'
     end
 
   end

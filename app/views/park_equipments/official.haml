@@ -1,0 +1,53 @@
+=render 'shared/modal_official'
+=render 'menu'
+= link_to "#", class: "btn btn-primary", "data-target" => "#modal_official", "data-toggle" => "modal"  do
+  Добавить ответственного
+-#= form_tag(park_equipments_official_path, :method => 'post') do
+-#  .form-group
+    -#.row
+    -#  .col
+    -#    = label_tag :surname, "Фамилия:"
+    -#    = text_field_tag :surname, "Фамилия"
+    -#.row
+    -#  .col
+    -#    = label_tag :name, "Имя:"
+    -#    = text_field_tag :name, "Имя:"
+    -#.row
+    -#  .col
+    -#    = label_tag :patronymic, "Отчество:"
+    -#    = text_field_tag :patronymic, "Отчество:"
+    -#%table
+    -#  %tr
+    -#    %td
+    -#      = label_tag :surname, "Фамилия:"
+    -#    %td
+    -#      = text_field_tag :surname
+    -#  %tr
+    -#    %td
+    -#      = label_tag :name, "Имя:"
+    -#    %td
+    -#      = text_field_tag :name
+    -#  %tr
+    -#    %td
+    -#      = label_tag :patronymic, "Отчество:"
+    -#    %td
+    -#      = text_field_tag :patronymic
+    -#  %tr
+    -#    %td
+    -#      = label_tag :phone, "Телефон:"
+    -#    %td
+    -#      = phone_field_tag :phone
+    -#  %tr
+    -#    %td
+    -#      = label_tag :branch, "Филиал"
+    -#    %td
+    -#      = select_tag :branch_id, "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe, class: "form-control"
+    -#  %tr
+    -#    %td
+    -#      = label_tag :department, "Отдел"
+    -#    %td
+    -#      = select_tag :department_id, "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe, class: "form-control"
+    -#  %tr
+    -#    %td
+    -#    %td
+    -#      = submit_tag "Сохранить", class: "btn"

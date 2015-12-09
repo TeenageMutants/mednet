@@ -10,6 +10,16 @@ module ParkEquipmentsHelper
     return org_id
   end
 
+  def get_branches
+    Branch.where(organization_id: Organization.find(Userinfo.find_by_user_id(current_user.id).organization_id).id)
+  end
+
+  def get_departments branch_id
+    i=rand(1)+1
+      Department.where(id: BranchesDepartment.where(branch_id: i))
+  end
+
+
   # def select_department branch_id
   #
   #   dep_id = BranchesDepartment.where(branch_id: branch_id)
@@ -35,8 +45,6 @@ module ParkEquipmentsHelper
       return false
     end
   end
-
-
 end
 
 

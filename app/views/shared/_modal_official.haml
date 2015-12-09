@@ -1,0 +1,24 @@
+#modal_official.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
+    .modal-content
+      = form_tag(url: official_park_equipments_path, :method => 'get')
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#modal_office.modal-title
+      .modal-body
+        .form-group
+          = label_tag :surname, "Фамилия:"
+          = text_field_tag :surname, nil, class: "form-control"
+          = label_tag :name, "Имя:"
+          = text_field_tag :name, nil, class: "form-control"
+          = label_tag :patronymic, "Отчество:"
+          = text_field_tag :patronymic, nil, class: "form-control"
+          = label_tag :phone, "Телефон:"
+          = phone_field_tag :phone, nil, class: "form-control"
+          = label_tag :branch, "Филиал"
+          = select_tag :branch_id, options_from_collection_for_select(get_branches, "id", "short_name"), class: "form-control"
+          = label_tag :department, "Отдел"
+          = select_tag :department_id, options_from_collection_for_select(get_departments(((params[:branch_id].to_s).to_i)), "id", "name"), class: "form-control"
+          %br
+          = submit_tag "Сохранить", class: "btn btn-primary"

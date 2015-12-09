@@ -28,6 +28,7 @@ puts "create MIAC"
 
 miac = Organization.create(short_name: "ГБУЗ КО МИАЦ КО", full_name: "Государственное Учреждение Здравоохранения Калужской области Медицинский Информационно-Аналитический Центр Калужской области", type_organization_id: 2, phone_city_code: 4842, reception_phone: "796710", ext_number: "11", fax: "796710", address: "Калужская область, г.Калуга, ул. Вишневского, д.1", lsd_id: 111, web_site: "http://miac.kaluga.ru")
 
+
 puts "create positions"
 
 position_one = Position.create(name: "Директор")

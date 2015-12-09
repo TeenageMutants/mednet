@@ -11,6 +11,27 @@ class ParkEquipmentsController < ApplicationController
   def index
 
   end
+  def official
+    Octopus.using(:shard_one) do
+      # @official=Official.new
+      # render text: Official.official_branch_show(1)
+      # if params[:branch_id].present?
+      #   render text: params.inspect
+      # end
+
+      # if params[:commit].present?
+      #   # Official.official_add(params)
+      #   # render text: params[:branch_id].to_s.to_i
+      #   # flash[:]
+      # end
+
+    end
+    if params[:commit].present?
+      render text: params[:branch_id].to_s.to_i.class
+    end
+
+
+  end
 
   def office
     @org = Organization.find(Userinfo.find_by_user_id(current_user.id).organization_id)
@@ -57,7 +78,9 @@ class ParkEquipmentsController < ApplicationController
       redirect_to office_park_equipments_path
     end
   end
-
+  # def get_departments organization_id
+  #   Department.where(BranchesDepartment.where(Organization.where(organization_id)))
+  # end
 
   def search_dep
     @data_from_select1 = params[:branch]
@@ -86,7 +109,9 @@ class ParkEquipmentsController < ApplicationController
     def office_params
       params.require(:office).permit!
     end
-
+    def official_params
+      params.require(:official).permit!
+    end
     def branch_params
       params.require(:branch).permit!
     end
