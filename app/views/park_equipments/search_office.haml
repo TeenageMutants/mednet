@@ -1,19 +1,13 @@
 = render 'menu'
--#= render 'shared/modal_office'
--#= render 'shared/modal_branch'
--#= render 'shared/modal_department'
--#= render 'shared/modal_department'
-НЕ работает. Отладить!
 .well
-  = form_tag(request.path, method: 'post') do
+  = form_tag(search_office_park_equipments_path, method: 'post') do
     .row
       .col-md-5
-        = select_tag :branch_id, options_from_collection_for_select(find_branches, "id", "short_name"), prompt: "Выберите филиал", class: "form-control"
+        = select_tag :branch_id, options_from_collection_for_select(find_branches, "id", "short_name", params[:branch_id]), prompt: "Выберите филиал", class: "form-control"
       .col-md-5
-        = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name") , prompt: "Выберите отдел", class: "form-control"
-      .col-md-2
-      = hidden_field_tag :act, 'office_search'
-      -#= hidden_field_tag :organizat_id, org_id
+        = select_tag :department_id, options_from_collection_for_select(Department.all, "id", "name", params[:department_id]) , prompt: "Выберите отдел", class: "form-control"
+
+      = hidden_field_tag :org_id, org_id
       .col-md-2
 
         = submit_tag "Поиск", class: "btn btn-primary",data: { disable_with: "Идет поиск, подождите...".html_safe}
@@ -51,27 +45,29 @@
             = link_to "Cбросить поиск", office_park_equipments_path
 
 
--if params[:commit].present? and params[:office_search].present?
-  - unless @offices.present?
-    %center
-      %h3
-        Кабинетов, удовлетворяющих вашему запросу, не нашлось.
-  - else
-    %strong
-      %h4
-        -#Результаты поиска:   #{@offices.count} кабинетов
-        -if @branch_name.present?
-          филиал:
-          #{@branch_name.short_name}
-        -if @department.present?
-          отдел: #{@department.name}
-    %p
-    %table.table.table-bordered
-      %th
-        Номер кабинета
+-if params[:commit].present? and @offices.blank?
+  %center
+    %h3
+      Кабинетов, удовлетворяющих вашему запросу, не нашлось.
 
 
-      - @offices.each do |office|
-        %tr
-          %td{style: "width:80%;"}
-            = link_to office.number.html_safe, show_office_park_equipment_path(id: office.id)
+-elsif params[:commit].present? and @offices.present?
+
+  %strong
+    %h4
+      Результаты поиска:   #{@offices.count} каб.
+      -if @branch_name.present?
+        филиал:
+        #{@branch_name.short_name}
+      -if @department.present?
+        отдел: #{@department.name}
+  %p
+    .well
+      .field_input
+        %table.table.table-bordered
+          %th.info
+            Номер кабинета
+            - @offices.each do |office|
+              %tr
+                %td{style: "width:80%;"}
+                  = link_to office.number.html_safe, show_office_park_equipment_path(id: office.id)

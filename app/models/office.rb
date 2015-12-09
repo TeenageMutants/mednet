@@ -20,30 +20,28 @@ class Office < ActiveRecord::Base
 
 
   def self.office_search params
-
-    if params[:branch_id].present? or params[:department_id].present? or  params[:number].present? or params[:floor].present? or params[:block].present?
-      offices = Office.using(:shard_one)
+    offices = Office.using(:shard_one)
+    if params[:branch_id].present? or params[:department_id].present?
       br_dep = BranchesDepartment
-
       br_dep = br_dep.where("branch_id =?", params[:branch_id]) if params[:branch_id].present?
       br_dep = br_dep.where("department_id = ?", params[:department_id]) if params[:department_id].present?
-
-
+      br_dep_id_ar = []
       if br_dep.present?
-
-        br_dep_id_ar = []
         br_dep.each do |id|
           br_dep_id_ar <<  id.id
         end
         offices = offices.where(branches_department_id: br_dep_id_ar)
+      else
+        offices = []
       end
 
 
-      offices= offices.where("lower(number) LIKE lower(?)", "%#{params[:number]}%") if params[:number].present?
-      offices = offices.where("floor = ?", params[:floor]) if params[:floor].present?
-      offices = offices.where("block = ?", params[:block]) if params[:block].present?
+    offices= offices.where("lower(number) LIKE lower(?)", "%#{params[:number]}%") if params[:number].present?
+    offices = offices.where("floor = ?", params[:floor]) if params[:floor].present?
+    offices = offices.where("block = ?", params[:block]) if params[:block].present?
 
-    elsif params[:org_id].present?
+    elsif params[:org_id].present? and params[:branch_id].blank? and params[:department_id].blank? and
+        params[:number].blank? or params[:floor].blank? or params[:block].blank?
       branch = Branch.where("organization_id = ?", params[:org_id])
       if branch.present?
         br_ar = []

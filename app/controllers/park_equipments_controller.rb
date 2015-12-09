@@ -3,8 +3,7 @@ class ParkEquipmentsController < ApplicationController
   before_filter :user_present
   def user_present
     unless current_user.present?
-      flash[:danger] =  "Чтобы войти в подсистему, авторизуйтесь!"
-      redirect_to root_path
+      redirect_to root_path, notice: "Чтобы войти в подсистему, авторизуйтесь!"
     end
   end
 
@@ -15,21 +14,15 @@ class ParkEquipmentsController < ApplicationController
 
   def office
     @org = Organization.find(Userinfo.find_by_user_id(current_user.id).organization_id)
-
-    # @branches = Branch.where(organization_id: @org.id)
     @departments_all = Department.all
-
-    # @branch_name = Branch.find(params[:branch_id]) if params[:branch_id].present?
     @department = Department.find(params[:department_id]) if params[:department_id].present?
-
-
-
   end
 
 
   def search_office
+    @offices = []
     if params[:commit].present?
-      flash[:success] == "Search"
+
       # render text: params.inspect
       @offices = Office.office_search(params)
       render 'search_office'
@@ -44,19 +37,6 @@ class ParkEquipmentsController < ApplicationController
     @branch = Branch.find(br_dep.branch_id)
     @department = Department.find(br_dep.department_id)
   end
-
-  # def create_office
-  #   if params[:commit] == 'добавить кабинет'
-  #     # render text: params.inspect
-  #     # @office_branch_department_id = BranchesDepartment.find_by_branch_id(params[:office_branch_id])
-  #     flash[:danger] = "Запись для кабинета создана"
-  #     # render text: params.inspect
-  #     # if @branch_department.errors.present?
-  #     #   flash[:danger] = "Ошибки при заполнении формы"
-  #     # end
-  #     redirect_to office_park_equipments_path
-  #   end
-  # end
 
   def create_branch
     if params[:commit] == 'добавить филиал'
@@ -86,9 +66,7 @@ class ParkEquipmentsController < ApplicationController
         format.json { respond_with_bip(@branch) }
       end
     end
-
   end
-
 
   def create_department
     if params[:commit].present?
@@ -119,28 +97,20 @@ class ParkEquipmentsController < ApplicationController
       end
       redirect_to office_park_equipments_path
     end
-
   end
 
   def delete_office
     @office = Office.using(:shard_one).find(params[:id])
-
     @office.update_attributes!(id: params[:id], is_deleted: true)
-
     redirect_to office_park_equipments_path
   end
 
   def edit_office
     @office = Office.using(:shard_one).find(params[:id])
     @office_br_dep_id = @office.branches_department_id
-
-
     @branch_id = BranchesDepartment.find(@office_br_dep_id).branch_id
     @department_id = BranchesDepartment.find(@office_br_dep_id).department_id
-
-
-
-    if params[:commit] == 'сохранить'
+    if params[:commit] == 'сохранить кабинет'
       department_id = params.require(:department).require(:branch_id).to_i
       if BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first.present?
         @bra_dep = BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first
@@ -150,8 +120,6 @@ class ParkEquipmentsController < ApplicationController
       else
         flash[:danger] = "Проверьте заданные параметры. Для вашей организации не задано такого сочетания филиала и отдела"
       end
-
-
       redirect_to office_park_equipments_path
     end
 

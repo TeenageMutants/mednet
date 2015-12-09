@@ -7,16 +7,12 @@ Rails.application.routes.draw do
     collection do
       get 'office'
       post 'office'
-      # post 'search_departments'
       post 'search_dep'
       post 'create_branch'
-      # get 'create_branch'
       post 'create_department'
-      # get'create_department'
       get 'search_office'
       post 'search_office'
       get 'add_office'
-
       get 'delete_office'
 
 
