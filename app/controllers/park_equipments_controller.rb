@@ -65,7 +65,7 @@ class ParkEquipmentsController < ApplicationController
     @branch = Branch.find(params[:id])
     respond_to do |format|
       if @branch.update_attributes(branch_params)
-        format.html { redirect_to(@branch, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(@branch) }
         format.json { respond_with_bip(@branch) }
       else
         format.html { render :action => "edit_branch" }
@@ -95,9 +95,7 @@ class ParkEquipmentsController < ApplicationController
 
       @office = Office.using(:shard_one).create(branches_department_id: @bra_dep.id, number: params[:number],
           floor: params[:floor], block: params[:block], is_deleted: false)
-
       flash[:success] = "Запись для кабинета создана"
-
       if @office.errors.present?
         flash[:danger] = "Ошибки при заполнении формы кабинета"
       end

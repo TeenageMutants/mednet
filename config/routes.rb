@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'main#index'
 
+  root 'main#index'
   devise_for :users
 
   resources :park_equipments, :only => :index do
@@ -15,20 +15,51 @@ Rails.application.routes.draw do
       post 'search_office'
       get 'add_office'
       get 'delete_office'
-
-
     end
     member do
       get 'show_office'
       get 'edit_office'
-      put 'edit_office'
+      # put 'edit_office'
       get 'show_branch'
       get 'edit_branch'
       put 'edit_branch'
-
     end
-
   end
+
+  resources :admin_park_equipments, :only => :index do
+    collection do
+      get 'department'
+      # post 'department'
+      get 'position'
+      # post 'position'
+      #
+
+      # post 'search_dep'
+      # post 'create_branch'
+      # get 'create_branch'
+      post 'create_department'
+      post 'create_position'
+      # get 'search_office'
+      # post 'search_office'
+      # get 'add_office'
+      get 'delete_department'
+      get 'delete_position'
+    end
+    member do
+      put 'edit_department'
+      put 'edit_position'
+      # get 'show_office'
+      # get 'edit_office'
+      # # put 'edit_office'
+      # get 'show_branch'
+      # get 'edit_branch'
+      # put 'edit_branch'
+    end
+  end
+
+
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

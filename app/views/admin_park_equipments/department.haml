@@ -1,0 +1,28 @@
+
+.well-sm
+  %h2
+    %center Администрирование справочника отделов
+=render 'menu'
+.well
+  .field_input
+    %p{:align => "left"}
+      %i
+        Чтобы отредактировать данные, щелкните по нужной записи
+    - if @departments.present?
+      %table.table.table-editable
+        -@departments.each do |department|
+          %tr
+            %td
+              =best_in_place department, :name, path: edit_department_admin_park_equipment_path(department.id)
+            %td
+              = link_to delete_department_admin_park_equipments_path(id: department.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
+                %i.fa.fa.fa-trash-o
+
+
+.well
+  .field_input
+    =form_for(@department, url: create_department_admin_park_equipments_path) do |f|
+      = f.label :name, "Название отдела", class: "form-control"
+      = f.text_field :name, class: "form-control"
+      = f.submit "добавить отдел", class: "btn btn-sm btn-primary"
+
