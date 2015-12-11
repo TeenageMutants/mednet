@@ -1,11 +1,7 @@
 class Branch < ActiveRecord::Base
-<<<<<<< HEAD
   has_many :branches_departments
   has_many :departments, through: :branches_departments
-=======
   belongs_to :organization
-  has_many :branches_departments
-  has_many :departments, through: :branches_departments
   using(:shard_one)
   has_many :offices, through: :branches_departments
   def self.add_branch params
@@ -13,8 +9,4 @@ class Branch < ActiveRecord::Base
                             full_name: params[:full_name], senior_phone: params[:senior_phone],
                             address: params[:address])
   end
-
-
-
->>>>>>> origin/Klavakurochkina
 end

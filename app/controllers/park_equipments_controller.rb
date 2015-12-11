@@ -106,11 +106,18 @@ class ParkEquipmentsController < ApplicationController
     end
     redirect_to office_park_equipments_path
   end
-<<<<<<< HEAD
-  # def get_departments organization_id
-  #   Department.where(BranchesDepartment.where(Organization.where(organization_id)))
-  # end
-=======
+
+  def create_department
+    if params[:commit].present?
+      @branch_department = BranchesDepartment.create(branches_department_params)
+      flash[:success] = "Запись связки создана"
+      # render text: params.inspect
+      if @branch_department.errors.present?
+        flash[:danger] = "Ошибки при заполнении формы"
+      end
+    end
+    redirect_to office_park_equipments_path
+  end
 
   def add_office
     @office = Office.using(:shard_one).new
@@ -118,8 +125,6 @@ class ParkEquipmentsController < ApplicationController
     if params[:commit] == 'сохранить кабинет'
       department_id = params.require(:department).require(:branch_id).to_i
       @bra_dep = BranchesDepartment.where(branch_id: params[:branch],department_id: department_id).first
->>>>>>> origin/Klavakurochkina
-
       @office = Office.using(:shard_one).create(branches_department_id: @bra_dep.id, number: params[:number],
           floor: params[:floor], block: params[:block], is_deleted: false)
       flash[:success] = "Запись для кабинета создана"
