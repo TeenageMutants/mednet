@@ -1,6 +1,7 @@
 .well
   .navbar-collapse.collapse
     %ul.nav.navbar-nav
+<<<<<<< HEAD
       %li
         = link_to "Кабинет", office_park_equipments_path, class: "btn btn-primary"
         -#= link_to "#", "data-target" => "#myModalOffice", "data-toggle" => "modal" do
@@ -34,6 +35,52 @@
         -#    %a{:href => "./"} Выбрать склад (На склад появится, если склад определен)
         -#  %li
         -#    %a{:href => "../navbar-static-top/"} что-то еще
+=======
+
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Кабинеты
+          %b.caret
+        %ul.dropdown-menu
+          -#%li.divider
+          -#%li.dropdown-header Кабинеты
+          %li
+            =link_to "Список кабинетов организации", office_park_equipments_path
+          %li
+            =link_to "Добавить кабинет", add_office_park_equipments_path
+            -#%a{:href => "#"} Создать кабинет
+          %li
+            = link_to "Поиск по кабинетам", search_office_park_equipments_path
+
+
+      %li
+        %a{:href => "#"} Создать конфигурацию оборудования
+      %li
+        %a{:href => "#"} Link
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Справочники
+          %b.caret
+        %ul.dropdown-menu
+          %li.divider
+          %li.dropdown-header Организация
+          %li
+            %a{:href => "#"} Отделы
+          %li
+            %a{:href => "#"} Должности
+
+          %li.divider
+          %li.dropdown-header Оборудование
+          %li
+            %a{:href => "#"} Производители
+          %li
+            %a{:href => "#"} Модели
+    %ul.nav.navbar-nav.navbar-right
+      %li.active
+        %a{:href => "./"} Выбрать склад (На склад появится, если склад определен)
+      %li
+        %a{:href => "../navbar-static-top/"} что-то еще
+>>>>>>> origin/Klavakurochkina
       %li.dropdown
         %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
           = set_organization(current_user.id)

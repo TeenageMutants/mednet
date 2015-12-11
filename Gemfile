@@ -118,7 +118,16 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 gem 'activerecord', '~> 4.2', '>= 4.2.4'
 gem 'activesupport', '~> 4.2', '>= 4.2.4'
 gem 'simple_form'
-gem 'jquery-rails'
+
+
+gem 'carmen-rails'
+gem 'jquery-ui-rails'
+
+gem 'best_in_place', github: 'aaronchi/best_in_place'
+# gem 'bootstrap-editable-rails'
+
+gem "therubyracer"
+gem "less-rails"
 
 group :test do
   gem 'rspec-rails'

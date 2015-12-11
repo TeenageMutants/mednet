@@ -15,4 +15,16 @@
 //= require bootstrap.min
 //= require app
 //= require turbolinks
+
+
+//= require jquery-ui
+
+//= require jquery.purr
+
 //= require_tree .
+//= require best_in_place
+
+
+
+
+

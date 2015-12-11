@@ -1,0 +1,28 @@
+
+.well-sm
+  %h2
+    %center Администрирование справочника должностей
+=render 'menu'
+.well
+  .field_input
+    %p{:align => "left"}
+      %i
+        Чтобы отредактировать данные, щелкните по нужной записи
+    - if @positions.present?
+      %table.table.table-editable
+        -@positions.each do |position|
+          %tr
+            %td
+              =best_in_place position, :name, path: edit_position_admin_park_equipment_path(position.id)
+
+            %td
+              = link_to delete_position_admin_park_equipments_path(id: position.id), data: { confirm: "Точно удалить?"}, class: "btn btn-sm btn-danger" do
+                %i.fa.fa.fa-trash-o
+
+.well
+  .field_input
+    =form_for(@position, url: create_position_admin_park_equipments_path) do |f|
+      = f.label :name, "Название должности", class: "form-control"
+      = f.text_field :name, class: "form-control"
+      = f.submit "добавить должность", class: "btn btn-sm btn-primary"
+

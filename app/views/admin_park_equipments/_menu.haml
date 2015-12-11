@@ -1,0 +1,36 @@
+%ul.nav.nav-pills
+  %li
+    = link_to "Отделы", department_admin_park_equipments_path
+    -#%a{:href => "#"} Главная
+  %li
+    = link_to "Должности", position_admin_park_equipments_path
+
+
+
+
+-#%nav#sidebar.sidebar.nav-collapse.collapse
+  %ul#side-nav.side-nav
+    %li.active
+      = link_to root_path do
+        %i.fa.fa-home
+        %span.name Главная
+    %li.panel
+      %ul
+        %li
+          = link_to root_path do
+            %i.fa.fa-comments
+            Форум
+        %li
+          = link_to root_path do
+            %i.fa.fa-calendar
+            Календарь задач
+        %li
+          = link_to park_equipments_path do
+            %i.fa.fa-book
+            Парк оборудования
+        %li
+          = link_to root_path do
+            %i.fa.fa-book
+            Банк документов
+
+            -#.navbar-collapse.collapse

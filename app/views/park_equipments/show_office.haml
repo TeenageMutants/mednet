@@ -1,0 +1,20 @@
+= render 'menu'
+%h3
+  %center
+    Информация о кабинете
+.form-group
+  .well
+    .field_input
+      Ваша организация:
+      = set_organization(current_user.id)
+      %br
+      Филиал: #{@branch.short_name}, контактный телефон: #{@branch.senior_phone}, адрес: #{@branch.address}
+      %br
+      Отдел: #{@department.name}
+      %br
+      Кабинет номер: #{@office.number}, корпус #{@office.block}, этаж #{@office.floor}
+
+
+%p{:align => "right"}
+  =link_to "Вернуться к структуре организации", office_park_equipments_path, data: {confirm: "Точно перейти?"}, class: "btn btn-sn btn-primary"
+  =link_to "Удалить кабинет", delete_office_park_equipments_path(id: params[:id]), data: {confirm: "Точно удалить?"}, class: "btn btn-sn btn-primary"

@@ -1,80 +1,20 @@
-#modal_office.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_office.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modal_office", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
-    = form_for @office, url: office_park_equipments_path, :method => 'post' do |f|
-      .modal-content
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          %h4#modal_office.modal-title
-        .modal-body
-
-          .form-group
-            = f.label "Номер или название кабинета"
-            %br
-            = f.text_field :number, class: "form-control", :autofocus => true, placeholder: "Название кабинета"
-
-          .form-group
-            .row
-              .col
-                = f.label "Этаж"
-                %br
-                = f.text_field :floor, class: "form-control", :autofocus => true, placeholder: "Этаж"
-              .col
-                = f.label "Корпус"
-                %br
-                = f.text_field :block, class: "form-control", :autofocus => true, placeholder: "Корпус"
-              .col
-                -#= f.label "Филиал"
-                = f.text_field :branches_department_id
-          = hidden_field_tag :act, 'create_office'
-          = f.submit "Сохранить"
-
-
-
-        -#= form_tag create_office_park_equipments_path, method: :post, class: "well form-horizontal"  do
-        -#  .modal-content
-        -#    .modal-header
-        -#      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-        -#        %span{"aria-hidden" => "true"} ×
-        -#      %h4#myModalOffice.modal-title Создайте кабинет
-        -#    .modal-body
-        -#      -#= form_tag create_office_park_equipments_path, method: :post, class: "well form-horizontal"  do
-        -#        %fieldset
-        -#      .form-group
-        -#        %label{:for => "number"} Номер или название кабинета
-        -#        .input-group
-        -#          %span.input-group-addon
-        -#          = text_field_tag 'office[number]', nil, {:class => "email form-control input-lg", placeholder: "Название кабинета", :autofocus => true}
-        -#
-        -#      .form-group
-        -#        .row
-        -#          .col
-        -#            %label{:for => "floor"} Этаж
-        -#            .input-group.input-group-lg
-        -#              %span.input-group-addon
-        -#              = select_tag 'office[floor]', "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe
-        -#              -#options_for_select(set_number_floor(10))
-        -#          .col
-        -#            %label{:for => "block"} Корпус
-        -#            .input-group.input-group-lg
-        -#              %span.input-group-addon
-        -#              = select_tag 'office[block]', "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe
-        -#              -#options_for_select(set_number_floor(10))
-        -#
-        -#      .form-group
-        -#        %label{:for => "branches_department"} Отдел
-        -#        %span.input-group-addon
-        -#          = text_field_tag 'office[branches_department_id]', placeholder: "ID отдела"
-        -#
-        -#      .form-group
-        -#        %label{:for => "branch_id"} Отдел
-        -#        %span.input-group-addon
-        -#          = select_tag 'office[branch_id]', "<option>1</option><option>2</option><option>3</option><option>4</option>".html_safe
-        -#          -#options_from_collection_for_select(@branch, "id", "name"), prompt_text: "Отдел"
-        -#
-        -#    .form-actions
-        -#      %button.btn.btn-block.btn-lg.btn-danger{:type => "submit"}
-        -#        %span.small-circle
-        -#          %i.fa.fa-caret-right
-        -#        %small Сохранить
-
+    = form_tag(office_park_equipments_path,method: 'get')
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#modal_office.modal-title
+      .modal-body
+        = label_tag :branch_id, "Выберите филиал"
+        = select_tag :branch, options_from_collection_for_select(find_branches, :id, :short_name)
+        -#= f.label :dep, "Выберите отдел:", id: "label_dep"
+        = grouped_collection_select(:department, :branch_id, find_branches, :departments, :short_name, :id, :name)
+        -#= f.label :number, "Номер кабинета"
+        = text_field_tag :number
+        -#= f.label :floor
+        = text_field_tag :floor
+        -#= f.label :block, "Корпус"
+        = text_field_tag :block
+        = submit_tag "добавить кабинет"

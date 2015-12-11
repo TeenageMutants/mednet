@@ -1,23 +1,17 @@
-#modal_department.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#modal_department.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modal_department", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{style: "margin-top: 100px; width:400px; z-index: 9999999999;"}
-
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#modal_department.modal-title
-      .modal-body
-        .form-group
-          Отметьте нужные отделы для добавления в вашу организацию
-          - @departments.each do |department|
-            %table.table.table-striped
-              %tr
-                %td
-                  = department.name
-                  = hidden_field_tag :department_id, department.id
-                  = hidden_field_tag :org_id, org_id
-                  = hidden_field_tag :act, 'create_departments'
-                %td
-                  = check_box_tag :check
-          = link_to "Добавить отделы", class: 'btn btn-sm btn-success'
-          -#= form_for @departments, url: office_park_equipments_path, :method => 'post' do |f|
+    = form_for BranchesDepartment.new, url: {action: "create_department"}, method: 'post' do |f|
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#modal_office.modal-title
+        .modal-body
+          .form-group
+            = f.label :branch_id, "Выберите филиал(организацию, если нет филиалов)"
+            = f.select :branch_id, options_from_collection_for_select(find_branches,  "id", "short_name")
+          .form-group
+            = f.label :department_id, "Выберите отдел для добавления"
+            = f.select :department_id, options_from_collection_for_select(Department.all, "id", "name")
+          .form-group
+            = f.submit "добавить филиал"

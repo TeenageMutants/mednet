@@ -1,0 +1,7 @@
+= render 'menu'
+%strong
+  .text-center
+    Редактирование записи кабинета
+.form-group
+  = form_tag(edit_office_park_equipment_path, method: 'get') do
+    = render "office"

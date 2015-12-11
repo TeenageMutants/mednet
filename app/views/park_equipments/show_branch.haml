@@ -1,0 +1,29 @@
+= render 'menu'
+%h3
+  %center
+    Информация о филиале
+.form-group
+  .well
+    .field_input
+      %p{:align => "right"}
+        %i
+          Чтобы отредактировать данные, щелкните по нужному полю
+      Ваша организация:
+      = set_organization(current_user.id)
+      %br
+      Филиал:
+      =best_in_place @branch, :short_name, path: edit_branch_park_equipment_path(@branch), :place_holder => "Click me to add content!"
+
+      %br
+      Полное название:
+      =best_in_place @branch, :full_name, path: edit_branch_park_equipment_path(@branch)
+      %br
+      Телефон:
+      = best_in_place @branch, :senior_phone, path: edit_branch_park_equipment_path(@branch)
+      %br
+      Адрес:
+      =best_in_place @branch, :address, path: edit_branch_park_equipment_path(@branch)
+
+%p{:align => "right"}
+  =link_to "Вернуться к структуре организации", office_park_equipments_path, data: {confirm: "Точно перейти?"}, class: "btn btn-sn btn-primary"
+  -#=link_to "Редактировать запись", edit_branch_park_equipment_path(id: @branch.id), class: "btn btn-sn btn-primary"

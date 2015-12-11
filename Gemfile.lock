@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/aaronchi/best_in_place.git
+  revision: 1152e2256afd485e66602833fd99d09d60994841
+  specs:
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (>= 3.1)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 1d93c5a77049b3d21d17c847ad0531d7714fa229
   branch: bootstrap3
@@ -78,6 +86,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carmen (1.0.2)
+      activesupport (>= 3.0.0)
+    carmen-rails (1.0.1)
+      carmen (~> 1.0.0)
+      rails
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -404,6 +417,11 @@ DEPENDENCIES
   activesupport (~> 4.2, >= 4.2.4)
   ancestry
   ar-octopus
+<<<<<<< HEAD
+=======
+  asset-image-opt
+  best_in_place!
+>>>>>>> origin/Klavakurochkina
   binding_of_caller
   bootstrap-sass (~> 3.3.3)
   bootstrap-will_paginate
@@ -411,6 +429,7 @@ DEPENDENCIES
   byebug
   cancancan
   capybara
+  carmen-rails
   carrierwave
   coffee-rails (~> 4.1.0)
   database_cleaner
